@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-language" content="pt-br">
+    <meta name="author" content="Danilo Sambugaro e Rafael Soratto">
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>GameOver - controleGames</title>
+    <script src = "../lib/Jquery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src = "../lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+
+</head>
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../index.html">GameOver</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../pessoa.html">Pessoas</a></li>
+                <li><a href="../cliente.html">Clientes</a></li>
+                <li><a href="../pedido.html">Pedidos</a></li><li><a href="../metodoPag.html">Métodos de Pagamento</a></li>
+                <li><a href="../funcionario.html">Funcionarios</a></li>
+                <li><a href="../supervisor.html">Supervisores</a></li>
+                <li><a href="../jogos.html">Jogos</a></li>
+                <li><a href="../empresas.html">Empresas</a></li>
+                <li><a href="../plataforma.html">Plataformas</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="container">
+        <div class="row">
+            <h3>Método de Pagamento - Adicionar</h3>
+        </div>
+        <hr />
+        <form action="#">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="id_plat">ID</label>
+                    <input type="text" class="form-control" id="id_plat" placeholder="ID da plataforma" name="metodo">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="metodo">Método</label>
+                    <input type="text" class="form-control" id="metodo" placeholder="Método" name="metodo">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <a href="../metodoPag.html" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

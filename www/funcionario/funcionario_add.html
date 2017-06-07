@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-language" content="pt-br">
+    <meta name="author" content="Danilo Sambugaro e Rafael Soratto">
+    
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>GameOver - controleGames</title>
+    <script src = "../lib/Jquery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../lib/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src = "../lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../usar_pessoa.js"></script>
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+
+</head>
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="../index.html">GameOver</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../pessoa.html">Pessoas</a></li>
+                <li><a href="../cliente.html">Clientes</a></li>
+                <li><a href="../pedido.html">Pedidos</a></li><li><a href="../metodoPag.html">Métodos de Pagamento</a></li>
+                <li><a href="../funcionario.html">Funcionarios</a></li>
+                <li><a href="../supervisor.html">Supervisores</a></li>
+                <li><a href="../jogos.html">Jogos</a></li>
+                <li><a href="../empresas.html">Empresas</a></li><li><a href="../plataforma.html">Plataformas</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body onload="checaUsoPessoa()">
+    <div class="container">
+        <div class="row">
+            <h3>Funcionário - Adicionar</h3>
+        </div>
+        <hr />
+        <form action="#">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <input type="radio" value="add_yes" id="add_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();" >
+                    <label for="add_pessoa">Nova Pessoa</label>
+                </div>
+                <div class="form-group col-md-2">
+                    <input type="radio" value="add_no" id="no_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();" checked>
+                    <label for="no_pessoa">Pessoa Existente</label>
+                </div>
+                <div class="form-group col-md-6">
+                    <select class="form-control" id="pessoa_selecionada" onchange="getPessoa();">
+                        <option value="0">Escolha uma pessoa...</option>
+                        <option value="12345678912">12345678912</option>
+                        <option value="15975315975">15975315975</option>
+                        <option value="23645789875">23645789875</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="nome">Nome</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" name="pessoa">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cpf">CPF</label>
+                    <input type="text" class="form-control" id="cpf" placeholder="CPF sem pontos ou traço" name="pessoa">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="nascimento">Data de Nascimento</label>
+                    <input type="date" class="form-control" id="nascimento" name="pessoa">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-2">
+                    <label for="logradouro">Logradouro</label>
+                    <select class="form-control" id="logradouro" name="pessoa">
+                        <option value="0">Escolha um tipo...</option>
+                        <option value="rua">Rua</option>
+                        <option value="avenida">Avenida</option>
+                        <option value="praca">Praça</option>
+                        <option value="travessa">Travessa</option>
+                        <option value="estrada">Estrada</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="nome_end">Nome</label>
+                    <input type="text" class="form-control" id="nome_end" placeholder="Digite o nome da rua" name="pessoa">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="num">Número</label>
+                    <input type="number" class="form-control" id="num" placeholder="Número" name="pessoa">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="bairro">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" placeholder="Nome do Bairro" name="pessoa">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="cep">CEP</label>
+                    <input type="number" class="form-control" id="cep" placeholder="CEP" name="pessoa">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="estado">Estado</label>
+                    <select class="form-control" id="estado" name="pessoa">
+                        <option value="0">Escolha um</option>
+                        <option value="ac">AC</option>
+                        <option value="al">AL</option>
+                        <option value="ap">AP</option>
+                        <option value="am">AM</option>
+                        <option value="ba">BA</option>
+                        <option value="ce">CE</option>
+                        <option value="df">DF</option>
+                        <option value="es">ES</option>
+                        <option value="go">GO</option>
+                        <option value="ma">MA</option>
+                        <option value="mt">MT</option>
+                        <option value="ms">MS</option>
+                        <option value="mg">MG</option>
+                        <option value="pa">PA</option>
+                        <option value="pb">PB</option>
+                        <option value="pr">PR</option>
+                        <option value="pe">PE</option>
+                        <option value="pi">PI</option>
+                        <option value="rj">RJ</option>
+                        <option value="en">RN</option>
+                        <option value="rs">RS</option>
+                        <option value="ro">RO</option>
+                        <option value="rr">RR</option>
+                        <option value="sc">SC</option>
+                        <option value="sp">SP</option>
+                        <option value="se">SE</option>
+                        <option value="to">TO</option>
+                    </select>
+                </div>
+            </div>
+            <hr />
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="usuario">Usuário</label>
+                    <input type="text" class="form-control" id="usuario" placeholder="Usuário" name="cliente">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="senha">Senha</label>
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" name="cliente">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">E-mail</label>
+                    <input type="email" class="form-control" id="senha" placeholder="E-mail válido" name="cliente">
+                </div>
+            </div>
+            <hr />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary">Adicionar</button>
+                    <a href="../funcionario.html" class="btn btn-default">Cancelar</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

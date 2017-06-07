@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-language" content="pt-br">
+    <meta name="author" content="Danilo Sambugaro e Rafael Soratto">
+
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <title>GameOver - controleGames</title>
+    <script src = "lib/Jquery/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="lib/bootstrap-3.3.7/css/bootstrap.min.css">
+    <script src = "lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+
+</head>
+<header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">GameOver</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="pessoa.html">Pessoas</a></li>
+                <li><a href="cliente.html">Clientes</a></li>
+                <li><a href="pedido.html">Pedidos</a></li><li><a href="metodoPag.html">Métodos de Pagamento</a></li>
+                <li><a href="funcionario.html">Funcionarios</a></li>
+                <li><a href="supervisor.html">Supervisores</a></li>
+                <li><a href="jogos.html">Jogos</a></li>
+                <li><a href="empresas.html">Empresas</a></li><li><a href="plataforma.html">Plataformas</a></li><li><a href="plataforma.html">Plataformas</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <h2>Plataformas</h2>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group h2">
+                    <input name="busca" class="form-control" id="buscaPlataforma" type="text" placeholder="Pesquisar Plataformas">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <a href="plataforma/plataforma_add.html" class="btn btn-primary pull-right h2">Nova Plataforma</a>
+            </div>
+        </div>
+        <hr />
+        <div id="list" class="row">
+            <div class="table-responsive col-md-12">
+                <table class="table table-striped" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Plataforma</th>
+                            <th class="opcoes">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>PC</td>
+                            <td class="opcoes">
+                                <a class="btn btn-primary btn-xs" href="plataforma/plataforma_view.html">Visualizar</a>
+                                <a class="btn btn-warning btn-xs" href="plataforma/plataforma_edit.html">Editar</a>
+                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-confirm">Deletar</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>PS4</td>
+                            <td class="opcoes">
+                                <a class="btn btn-primary btn-xs" href="plataforma/plataforma_view.html">Visualizar</a>
+                                <a class="btn btn-warning btn-xs" href="plataforma/plataforma_edit.html">Editar</a>
+                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-confirm">Deletar</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="delete-confirm" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+                </div>
+                <div class="modal-body">
+                    Deseja realmente excluir este item?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Sim</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
