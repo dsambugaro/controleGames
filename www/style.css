@@ -1,0 +1,9 @@
+body {
+    padding-top: 70px;
+}
+
+select[readonly] {
+  background: #eee; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+  pointer-events: none;
+  touch-action: none;
+}
