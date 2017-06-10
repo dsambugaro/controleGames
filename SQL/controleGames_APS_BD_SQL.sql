@@ -187,6 +187,17 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`PLATAFORMA` (
 
 
 -- -----------------------------------------------------
+-- Table `controleGames_APS_BD`.`GENERO`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `controleGames_APS_BD`.`GENERO` ;
+
+CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`GENERO` (
+  `ID` INT AUTO_INCREMENT,
+  `nome` VARCHAR(20) NOT NULL,
+  UNIQUE(`nome`),
+  PRIMARY KEY (`ID`));
+
+-- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`JOGOS`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `controleGames_APS_BD`.`JOGOS` ;
@@ -194,7 +205,7 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`JOGOS` ;
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`JOGOS` (
   `codigo` INT NOT NULL,
   `titulo` VARCHAR(255) NOT NULL,
-  `genero` VARCHAR(45) NOT NULL,
+  `genero` INT NOT NULL,
   `plataforma` INT NOT NULL,
   `sinopse` LONGTEXT NULL,
   `lançamento` DATE NOT NULL,
@@ -208,9 +219,13 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`JOGOS` (
     REFERENCES `controleGames_APS_BD`.`EMPRESA` (`CNPJ`),
   CONSTRAINT `fk_JOGOS_PLATAFORMA`
     FOREIGN KEY (`plataforma`)
-    REFERENCES `controleGames_APS_BD`.`PLATAFORMA` (`ID`));
-
-
+    REFERENCES `controleGames_APS_BD`.`PLATAFORMA` (`ID`),
+  CONSTRAINT `fk_JOGOS_GENERO`
+    FOREIGN KEY (`genero`)
+    REFERENCES `controleGames_APS_BD`.`GENERO` (`ID`)
+    );
+    
+    
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`COMPRA_CONTEM`
 -- -----------------------------------------------------
@@ -256,6 +271,7 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`METODO` ;
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`METODO` (
   `ID` INT AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
+  UNIQUE(`nome`),
   PRIMARY KEY (`ID`));
 
 -- -----------------------------------------------------
@@ -374,7 +390,6 @@ INSERT INTO `controleGames_APS_BD`.`FUNCIONARIO` (`cracha`, `PESSOA_CPF`) VALUES
 INSERT INTO `controleGames_APS_BD`.`SUPERVISOR` (`usuario`, `senha`, `FUNCIONARIO_PESSOA_CPF`) VALUES ('mlee', 'sup123', '90146845170');
 
 
-
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`FISCALIZADO_POR`
 -- -----------------------------------------------------
@@ -418,14 +433,24 @@ INSERT INTO `controleGames_APS_BD`.`METODO` (`nome`) VALUES ('Boleto');
 INSERT INTO `controleGames_APS_BD`.`METODO` (`nome`) VALUES ('Depósito Bancário');
 INSERT INTO `controleGames_APS_BD`.`METODO` (`nome`) VALUES ('Cartão de Crédito');
 
+
+-- -----------------------------------------------------
+-- Data for table `controleGames_APS_BD`.`GENERO`
+-- -----------------------------------------------------
+INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('Plataforma');
+INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('FPS');
+INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('Corrida');
+INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('Ação');
+INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('Aventura');
+
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`JOGOS`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (4589, 'Super Mario', 'Plataforma', 1, 'Super Mario Bros. é um jogo eletrônico lançado pela Nintendo em 1985. Considerado um clássico, Super Mario Bros. foi um dos primeiros jogos de plataforma com rolagem lateral, recurso conhecido em inglês como side-scrolling', '2006-12-25', 0, 60.0, 0, '47462545000183');
-INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (7894, 'Call of Duty: Infite Warface', 'FPS', 2, 'Call of Duty (frequentemente abreviado como CoD) é uma série de videojogos na primeira pessoa. A série começou no PC, mais tarde expandindo-se para os vários tipos de consolas. Também foram lançados vários jogos spin-off. ', '2003-11-04', 16, 95.9, 5, '93111580000175');
-INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1549, 'Need For Speed', 'Corrida', 3, 'Need for Speed é um jogo eletrônico de corrida que foi produzido pelo estúdio Ghost Games e lançado pela Electronic Arts para as plataformas PlayStation 4, Xbox One e para Microsoft Windows. O game, que possui uma jogabilidade não linear dá ao jogador a liberdade de explorar totalmente os cenários, é o vigésimo primeiro da franquia Need for Speed, sendo, porém, um reboot a esta popular série.', '2015-11-03', 12, 90.0, 2, '62313357000187');
-INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1548, 'Far Cry Primal', 'Acao-Aventura', 3, 'Far Cry Primal é um videojogo de ação-aventura na primeira pessoa desenvolvido pela Ubisoft Montreal com a assistência de Ubisoft Toronto, Ubisoft Kiev e Ubisoft Shanghai e publicado pela Ubisoft.', '2016-03-01', 18, 165.0, 1, '38644428000140');
-
+INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (4589, 'Super Mario', 1, 1, 'Super Mario Bros. é um jogo eletrônico lançado pela Nintendo em 1985. Considerado um clássico, Super Mario Bros. foi um dos primeiros jogos de plataforma com rolagem lateral, recurso conhecido em inglês como side-scrolling', '2006-12-25', 0, 60.0, 0, '47462545000183');
+INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (7894, 'Call of Duty: Infite Warface', 2, 2, 'Call of Duty (frequentemente abreviado como CoD) é uma série de videojogos na primeira pessoa. A série começou no PC, mais tarde expandindo-se para os vários tipos de consolas. Também foram lançados vários jogos spin-off. ', '2003-11-04', 16, 95.9, 5, '93111580000175');
+INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1549, 'Need For Speed', 3, 3, 'Need for Speed é um jogo eletrônico de corrida que foi produzido pelo estúdio Ghost Games e lançado pela Electronic Arts para as plataformas PlayStation 4, Xbox One e para Microsoft Windows. O game, que possui uma jogabilidade não linear dá ao jogador a liberdade de explorar totalmente os cenários, é o vigésimo primeiro da franquia Need for Speed, sendo, porém, um reboot a esta popular série.', '2015-11-03', 12, 90.0, 2, '62313357000187');
+INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1548, 'Far Cry Primal', 4, 3, 'Far Cry Primal é um videojogo de ação-aventura na primeira pessoa desenvolvido pela Ubisoft Montreal com a assistência de Ubisoft Toronto, Ubisoft Kiev e Ubisoft Shanghai e publicado pela Ubisoft.', '2016-03-01', 18, 165.0, 1, '38644428000140');
 
 
 -- -----------------------------------------------------
@@ -437,13 +462,11 @@ INSERT INTO `controleGames_APS_BD`.`COMPRA_CONTEM` (`JOGOS_codigo`, `COMPRAS_ID_
 INSERT INTO `controleGames_APS_BD`.`COMPRA_CONTEM` (`JOGOS_codigo`, `COMPRAS_ID_compras`, `quantidade`, `preco_unit`) VALUES (7894, 4, 5, 65.9);
 
 
-
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`CLIENTE_AVALIACAO_JOGOS`
 -- -----------------------------------------------------
 INSERT INTO `controleGames_APS_BD`.`CLIENTE_AVALIACAO_JOGOS` (`CLIENTE_PESSOA_CPF`, `JOGOS_codigo`, `nota`) VALUES ('78234536494', 1548, 5);
 INSERT INTO `controleGames_APS_BD`.`CLIENTE_AVALIACAO_JOGOS` (`CLIENTE_PESSOA_CPF`, `JOGOS_codigo`, `nota`) VALUES ('73314993510', 4589, 3);
-
 
 
 -- -----------------------------------------------------
