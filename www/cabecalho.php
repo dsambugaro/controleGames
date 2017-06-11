@@ -12,9 +12,9 @@
     <link rel="stylesheet" href="lib/bootstrap-3.3.7/css/bootstrap.min.css">
     <script src = "lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="lib/jQuery-Autocomplete/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="lib/jQuery-Autocomplete/jquery-ui.theme.min.css">
-    <link rel="stylesheet" href="lib/jQuery-Autocomplete/jquery-ui.min.css">
+    <script src="lib/jQuery-ui/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="lib/jQuery-ui/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="lib/jQuery-ui/jquery-ui.min.css">
 
 
 </head>
