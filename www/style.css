@@ -2,8 +2,25 @@ body {
     padding-top: 70px;
 }
 
+
+.busca {
+    position: absolute;
+    left: 30%;
+    right: 30%
+}
+
+.busca form button {
+    
+}
+
+.list-group-item:last-child {
+  margin-bottom: 0;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 select[readonly] {
-  background: #eee; /*Simular campo inativo - Sugestão @GabrielRodrigues*/
+  background: #eee;
   pointer-events: none;
   touch-action: none;
 }

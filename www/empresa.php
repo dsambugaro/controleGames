@@ -51,7 +51,7 @@
                         <tr>
                             <td><?=$row['CNPJ']?></td>
                             <td><?=$row['nome']?></td>
-                            <td><?=$row['ultima_compra']?></td>
+                            <td><?=date('d/m/Y', strtotime($row['ultima_compra']))?></td>
                             <?php
                                 include 'acoes.php';
                             ?>

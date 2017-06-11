@@ -1,4 +1,4 @@
-<td class="opcoes">
+<td>
     <ul class="list-inline">
         <li>
             <form action="<?=$tableMin?>/<?=$tableMin?>_view.php" method="post">

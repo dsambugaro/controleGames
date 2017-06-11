@@ -2,7 +2,6 @@
     include 'cabecalho.php';
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
-    include '/metodo_control.php';
     $table = METODO;
     $key = ID;
     $tableMin = strtolower($table);

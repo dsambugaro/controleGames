@@ -7,10 +7,16 @@
 
     <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>GameOver - controleGames</title>
+
     <script src = "lib/Jquery/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="lib/bootstrap-3.3.7/css/bootstrap.min.css">
     <script src = "lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="lib/jQuery-Autocomplete/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="lib/jQuery-Autocomplete/jquery-ui.theme.min.css">
+    <link rel="stylesheet" href="lib/jQuery-Autocomplete/jquery-ui.min.css">
+
+
 </head>
 <header>
     <nav class="navbar navbar-inverse navbar-fixed-top">

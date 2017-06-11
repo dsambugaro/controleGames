@@ -1,7 +1,8 @@
 <?php
-    include "cabecalho.php";
+    include 'cabecalho.php';
+    include 'bd_control/conecta.php';
+    include 'bd_control/control.php';
 ?>
-
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -75,7 +76,7 @@
             </div>
         </div>
     </div>
-    
+
 <?php
     include "modal_excluir.php";
     include "rodape.php";

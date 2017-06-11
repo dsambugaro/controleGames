@@ -1,6 +1,6 @@
 <?php
     include '../cabecalho_interno.php';
-    $table = METODO;
+    $table = PLATAFORMA;
     $tableMin = strtolower($table);
     $tratamento = a;
 ?>
@@ -10,7 +10,7 @@
         </div>
         <hr />
         <?php
-            include '../acoes.php';
+            include '../results.php';
         ?>
         <form action="add.php" method="post">
             <div class="row">

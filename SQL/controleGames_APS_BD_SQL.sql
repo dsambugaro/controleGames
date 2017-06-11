@@ -78,6 +78,19 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`ENDERECO` (
 
 
 -- -----------------------------------------------------
+-- Table `controleGames_APS_BD`.`USUARIO`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `controleGames_APS_BD`.`USUARIO` ;
+
+CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`USUARIO` (
+  `ID` INT AUTO_INCREMENT,
+  `user` VARCHAR(20) NOT NULL,
+  `senha` VARCHAR(45) NOT NULL,
+  UNIQUE(`user`),
+  PRIMARY KEY (`ID`));
+
+
+-- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`CLIENTE`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `controleGames_APS_BD`.`CLIENTE` ;
@@ -85,15 +98,16 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`CLIENTE` ;
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`CLIENTE` (
   `PESSOA_CPF` CHAR(11) NOT NULL,
   `usuario` VARCHAR(20) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
   `ultima_compra` DATE NULL,
   `email` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`PESSOA_CPF`),
   UNIQUE(`usuario`),
   CONSTRAINT `fk_CLIENTE_PESSOA1`
     FOREIGN KEY (`PESSOA_CPF`)
-    REFERENCES `controleGames_APS_BD`.`PESSOA` (`CPF`));
-
+    REFERENCES `controleGames_APS_BD`.`PESSOA` (`CPF`),
+  CONSTRAINT `fk_CLIENTE_USUARIO`
+    FOREIGN KEY (`usuario`)
+    REFERENCES `controleGames_APS_BD`.`USUARIO` (`ID`));
 
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`FUNCIONARIO`
@@ -103,6 +117,7 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`FUNCIONARIO` ;
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`FUNCIONARIO` (
   `cracha` INT NOT NULL,
   `PESSOA_CPF` CHAR(11) NULL,
+  `telefone` CHAR(11),
   PRIMARY KEY (`PESSOA_CPF`),
   UNIQUE (`cracha`),
   CONSTRAINT `fk_FUNCIONARIO_PESSOA1`
@@ -117,13 +132,17 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`SUPERVISOR` ;
 
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`SUPERVISOR` (
   `usuario` VARCHAR(20) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
   `FUNCIONARIO_PESSOA_CPF` CHAR(11) NOT NULL,
   PRIMARY KEY (`FUNCIONARIO_PESSOA_CPF`),
   UNIQUE(`usuario`),
   CONSTRAINT `fk_SUPERVISOR_FUNCIONARIO1`
     FOREIGN KEY (`FUNCIONARIO_PESSOA_CPF`)
-    REFERENCES `controleGames_APS_BD`.`FUNCIONARIO` (`PESSOA_CPF`));
+    REFERENCES `controleGames_APS_BD`.`FUNCIONARIO` (`PESSOA_CPF`),
+  CONSTRAINT `fk_SUPERVISOR_USUARIO`
+    FOREIGN KEY (`usuario`)
+    REFERENCES `controleGames_APS_BD`.`USUARIO` (`ID`));
+
+
 
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`FISCALIZADO_POR`
@@ -141,6 +160,9 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`FISCALIZADO_POR` (
     FOREIGN KEY (`SUPERVISOR_FUNCIONARIO_PESSOA_CPF`)
     REFERENCES `controleGames_APS_BD`.`SUPERVISOR` (`FUNCIONARIO_PESSOA_CPF`));
 
+
+
+
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`EMPRESA`
 -- -----------------------------------------------------
@@ -151,6 +173,7 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`EMPRESA` (
   `nome` VARCHAR(255) NOT NULL,
   `ultima_compra` DATE NULL,
   PRIMARY KEY (`CNPJ`));
+
 
 
 -- -----------------------------------------------------
@@ -186,6 +209,8 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`PLATAFORMA` (
   PRIMARY KEY (`ID`));
 
 
+
+
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`GENERO`
 -- -----------------------------------------------------
@@ -196,6 +221,9 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`GENERO` (
   `nome` VARCHAR(20) NOT NULL,
   UNIQUE(`nome`),
   PRIMARY KEY (`ID`));
+
+
+
 
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`JOGOS`
@@ -226,6 +254,8 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`JOGOS` (
     );
     
     
+    
+    
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`COMPRA_CONTEM`
 -- -----------------------------------------------------
@@ -243,6 +273,8 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`COMPRA_CONTEM` (
   CONSTRAINT `fk_JOGOS_has_COMPRAS_COMPRAS1`
     FOREIGN KEY (`COMPRAS_ID_compras`)
     REFERENCES `controleGames_APS_BD`.`COMPRAS` (`ID_compras`));
+
+
 
 
 -- -----------------------------------------------------
@@ -263,6 +295,8 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`CLIENTE_AVALIACAO_JOGOS` (
     REFERENCES `controleGames_APS_BD`.`JOGOS` (`codigo`));
 
 
+
+
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`METODO`
 -- -----------------------------------------------------
@@ -273,6 +307,8 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`METODO` (
   `nome` VARCHAR(45) NOT NULL,
   UNIQUE(`nome`),
   PRIMARY KEY (`ID`));
+
+
 
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`PEDIDO`
@@ -295,6 +331,7 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`PEDIDO` (
     REFERENCES `controleGames_APS_BD`.`METODO` (`ID`));
 
 
+
 -- -----------------------------------------------------
 -- Table `controleGames_APS_BD`.`PEDIDO_CONTEM`
 -- -----------------------------------------------------
@@ -314,6 +351,7 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`PEDIDO_CONTEM` (
     REFERENCES `controleGames_APS_BD`.`JOGOS` (`codigo`));
 
 
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`PESSOA`
 -- -----------------------------------------------------
@@ -327,6 +365,9 @@ INSERT INTO `controleGames_APS_BD`.`PESSOA` (`CPF`, `nome_pessoa`, `data_nasc_pe
 INSERT INTO `controleGames_APS_BD`.`PESSOA` (`CPF`, `nome_pessoa`, `data_nasc_pessoa`) VALUES ('54651643108', 'Lucas Henrique', '1989-08-30');
 INSERT INTO `controleGames_APS_BD`.`PESSOA` (`CPF`, `nome_pessoa`, `data_nasc_pessoa`) VALUES ('12490072323', 'Michel Gomes', '2000-02-28');
 INSERT INTO `controleGames_APS_BD`.`PESSOA` (`CPF`, `nome_pessoa`, `data_nasc_pessoa`) VALUES ('90146845170', 'Mohammed Lee', '1995-01-18');
+
+
+
 
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`ESTADO`
@@ -390,6 +431,8 @@ INSERT INTO `controleGames_APS_BD`.`FUNCIONARIO` (`cracha`, `PESSOA_CPF`) VALUES
 INSERT INTO `controleGames_APS_BD`.`SUPERVISOR` (`usuario`, `senha`, `FUNCIONARIO_PESSOA_CPF`) VALUES ('mlee', 'sup123', '90146845170');
 
 
+
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`FISCALIZADO_POR`
 -- -----------------------------------------------------
@@ -398,6 +441,9 @@ INSERT INTO `controleGames_APS_BD`.`FISCALIZADO_POR` (`FUNCIONARIO_PESSOA_CPF`,`
 INSERT INTO `controleGames_APS_BD`.`FISCALIZADO_POR` (`FUNCIONARIO_PESSOA_CPF`,`SUPERVISOR_FUNCIONARIO_PESSOA_CPF`) VALUES ('54651643108','90146845170');
 INSERT INTO `controleGames_APS_BD`.`FISCALIZADO_POR` (`FUNCIONARIO_PESSOA_CPF`,`SUPERVISOR_FUNCIONARIO_PESSOA_CPF`) VALUES ('12490072323','90146845170');
 INSERT INTO `controleGames_APS_BD`.`FISCALIZADO_POR` (`FUNCIONARIO_PESSOA_CPF`,`SUPERVISOR_FUNCIONARIO_PESSOA_CPF`) VALUES ('90146845170', NULL);
+
+
+
 
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`EMPRESA`
@@ -410,6 +456,7 @@ INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `ultima_compra`) V
 
 
 
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`COMPRAS`
 -- -----------------------------------------------------
@@ -419,6 +466,8 @@ INSERT INTO `controleGames_APS_BD`.`COMPRAS` (`preco_total`, `data`, `EMPRESA_CN
 INSERT INTO `controleGames_APS_BD`.`COMPRAS` (`preco_total`, `data`, `EMPRESA_CNPJ`, `SUPERVISOR_FUNCIONARIO_PESSOA_CPF`) VALUES (329.5, '2017-02-17', '93111580000175', '90146845170');
 
 
+
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`PLATAFORMA`
 -- -----------------------------------------------------
@@ -426,12 +475,19 @@ INSERT INTO `controleGames_APS_BD`.`PLATAFORMA` (`nome`) VALUES ('Wii');
 INSERT INTO `controleGames_APS_BD`.`PLATAFORMA` (`nome`) VALUES ('Xbox');
 INSERT INTO `controleGames_APS_BD`.`PLATAFORMA` (`nome`) VALUES ('PC');
 
+
+
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`METODO`
 -- -----------------------------------------------------
 INSERT INTO `controleGames_APS_BD`.`METODO` (`nome`) VALUES ('Boleto');
 INSERT INTO `controleGames_APS_BD`.`METODO` (`nome`) VALUES ('Depósito Bancário');
 INSERT INTO `controleGames_APS_BD`.`METODO` (`nome`) VALUES ('Cartão de Crédito');
+
+
+
+
 
 
 -- -----------------------------------------------------
@@ -444,6 +500,9 @@ INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('Ação');
 INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('Aventura');
 
 
+
+
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`JOGOS`
 -- -----------------------------------------------------
@@ -451,6 +510,8 @@ INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plata
 INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (7894, 'Call of Duty: Infite Warface', 2, 2, 'Call of Duty (frequentemente abreviado como CoD) é uma série de videojogos na primeira pessoa. A série começou no PC, mais tarde expandindo-se para os vários tipos de consolas. Também foram lançados vários jogos spin-off. ', '2003-11-04', 16, 95.9, 5, '93111580000175');
 INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1549, 'Need For Speed', 3, 3, 'Need for Speed é um jogo eletrônico de corrida que foi produzido pelo estúdio Ghost Games e lançado pela Electronic Arts para as plataformas PlayStation 4, Xbox One e para Microsoft Windows. O game, que possui uma jogabilidade não linear dá ao jogador a liberdade de explorar totalmente os cenários, é o vigésimo primeiro da franquia Need for Speed, sendo, porém, um reboot a esta popular série.', '2015-11-03', 12, 90.0, 2, '62313357000187');
 INSERT INTO `controleGames_APS_BD`.`JOGOS` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lançamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1548, 'Far Cry Primal', 4, 3, 'Far Cry Primal é um videojogo de ação-aventura na primeira pessoa desenvolvido pela Ubisoft Montreal com a assistência de Ubisoft Toronto, Ubisoft Kiev e Ubisoft Shanghai e publicado pela Ubisoft.', '2016-03-01', 18, 165.0, 1, '38644428000140');
+
+
 
 
 -- -----------------------------------------------------
@@ -462,11 +523,15 @@ INSERT INTO `controleGames_APS_BD`.`COMPRA_CONTEM` (`JOGOS_codigo`, `COMPRAS_ID_
 INSERT INTO `controleGames_APS_BD`.`COMPRA_CONTEM` (`JOGOS_codigo`, `COMPRAS_ID_compras`, `quantidade`, `preco_unit`) VALUES (7894, 4, 5, 65.9);
 
 
+
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`CLIENTE_AVALIACAO_JOGOS`
 -- -----------------------------------------------------
 INSERT INTO `controleGames_APS_BD`.`CLIENTE_AVALIACAO_JOGOS` (`CLIENTE_PESSOA_CPF`, `JOGOS_codigo`, `nota`) VALUES ('78234536494', 1548, 5);
 INSERT INTO `controleGames_APS_BD`.`CLIENTE_AVALIACAO_JOGOS` (`CLIENTE_PESSOA_CPF`, `JOGOS_codigo`, `nota`) VALUES ('73314993510', 4589, 3);
+
+
 
 
 -- -----------------------------------------------------
@@ -477,8 +542,11 @@ INSERT INTO `controleGames_APS_BD`.`PEDIDO` (`frete`, `data`, `valor_total`, `me
 
 
 
+
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`PEDIDO_CONTEM`
 -- -----------------------------------------------------
 INSERT INTO `controleGames_APS_BD`.`PEDIDO_CONTEM` (`PEDIDO_ID`, `JOGOS_codigo`, `quantidade`, `preco_unit`) VALUES (1, 4589, 1, 60.0);
 INSERT INTO `controleGames_APS_BD`.`PEDIDO_CONTEM` (`PEDIDO_ID`, `JOGOS_codigo`, `quantidade`, `preco_unit`) VALUES (2, 1548, 2, 165.0);
+
+
