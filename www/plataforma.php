@@ -21,11 +21,7 @@
                 <div class="input-group h2">
                     <input name="busca" class="form-control" id="busca" type="text"
                     placeholder="Pesquisar Plataformas">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -70,8 +66,6 @@
         </div>
     </div>
     <script>
-        var teste = <?=json_encode($rows)?>;
-        console.log(teste);
         $( "#busca" ).autocomplete({
             source: 'busca.php?campo=<?=$campo_pesquisa?>&table=<?=$table?>',
         });

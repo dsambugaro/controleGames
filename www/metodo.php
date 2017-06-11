@@ -2,6 +2,8 @@
     include 'cabecalho.php';
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
+
+    $campo_pesquisa = nome;
     $table = METODO;
     $key = ID;
     $tableMin = strtolower($table);
@@ -16,12 +18,8 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group h2">
-                    <input name="busca" class="form-control" id="buscaMetodo" type="text" placeholder="Pesquisar Métodos">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                    <input name="busca" class="form-control" id="busca" type="text" placeholder="Pesquisar Métodos">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -41,7 +39,7 @@
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="itens">
                         <?php
                             foreach ($rows as $row):
                         ?>
@@ -59,6 +57,25 @@
             </div>
         </div>
     </div>
+    <script>
+        $( "#busca" ).autocomplete({
+            source: 'busca.php?campo=<?=$campo_pesquisa?>&table=<?=$table?>',
+        });
+        $( "#busca" ).on( "autocompleteselect", function( event, ui ) {
+            var buscar = ui.item.value;
+            $.ajax({
+                method: "post",
+                url: 'busca.php?campo=<?=$campo_pesquisa?>&table=<?=$table?>',
+                data: 'acao=1&key=<?=$key?>&filtro='+buscar,
+                dataType: 'html',
+                success: function(retorno){
+                    var resultado = document.getElementById("itens");
+                    console.log(retorno);
+                    resultado.innerHTML = retorno;
+                }
+            });
+        })
+    </script>
 
 <?php
     include "modal_excluir.php";
