@@ -8,15 +8,15 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" name="empresa_nome">
+                    <input type="text" class="form-control" id="nome" placeholder="Digite o nome" name="empresa_nome" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ sem pontuação" name="empresa_cnpj">
+                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ sem pontuação" name="empresa_cnpj" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="tel">Telefone</label>
-                    <input type="text" class="form-control" id="tel" placeholder="Telefone com DDD" name="empresa_telefone">
+                    <input type="text" class="form-control" id="tel" placeholder="Telefone com DDD" name="empresa_telefone" required>
                 </div>
             </div>
 

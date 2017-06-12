@@ -19,7 +19,7 @@
                     <label for="plataforma">Plataforma</label>
                     <input type="text" class="form-control" id="plataforma"
                         placeholder="Plataforma" name="plataforma_nome"
-                        value="<?=$row['nome']?>"
+                        value="<?=$row['nome']?>" required
                     >
                     <input type="hidden" class="form-control"
                         placeholder="Plataforma" name="id"

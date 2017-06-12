@@ -18,7 +18,7 @@
                     <label for="metodo">Método</label>
                     <input type="text" class="form-control" id="metodo_nome"
                             placeholder="Método" name="metodo_nome"
-                            value="<?=$row['nome']?>"
+                            value="<?=$row['nome']?>" required
                     >
                     <input type="hidden" class="form-control" id="metodo_id"
                             placeholder="ID do metodo" name="metodo_id"

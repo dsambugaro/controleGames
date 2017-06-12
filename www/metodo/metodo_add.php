@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label for="metodo">Método</label>
-                    <input type="text" class="form-control" id="metodo" placeholder="Método" name="metodo_nome">
+                    <input type="text" class="form-control" id="metodo" placeholder="Método" name="metodo_nome" required>
                 </div>
             </div>
             <br>
