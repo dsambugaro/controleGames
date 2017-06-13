@@ -1,6 +1,7 @@
 <?php
 include '../bd_control/conecta.php';
 include 'metodo_control.php';
+
 $nome_metodo = $_POST['metodo_nome'];
 $ID = $_POST['metodo_id'];
 

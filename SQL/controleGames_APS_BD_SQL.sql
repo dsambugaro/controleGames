@@ -37,8 +37,10 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`PESSOA` (
 DROP TABLE IF EXISTS `controleGames_APS_BD`.`ESTADO` ;
 
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`ESTADO` (
+  `ID` INT AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`nome`));
+  UNIQUE(`nome`),
+  PRIMARY KEY (`ID`));
 
 
 -- -----------------------------------------------------
@@ -47,12 +49,13 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`ESTADO` (
 DROP TABLE IF EXISTS `controleGames_APS_BD`.`CIDADE` ;
 
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`CIDADE` (
+  `ID` INT AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
-  `ESTADO_nome` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`nome`),
+  `ESTADO_ID` INT NOT NULL,
+  PRIMARY KEY (`ID`),
   CONSTRAINT `fk_CIDADE_ESTADO1`
-    FOREIGN KEY (`ESTADO_nome`)
-    REFERENCES `controleGames_APS_BD`.`ESTADO` (`nome`));
+    FOREIGN KEY (`ESTADO_ID`)
+    REFERENCES `controleGames_APS_BD`.`ESTADO` (`ID`));
 
 
 -- -----------------------------------------------------
@@ -67,14 +70,14 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`ENDERECO` (
   `numero` INT NOT NULL,
   `bairro` VARCHAR(255) NOT NULL,
   `CEP` INT NOT NULL,
-  `CIDADE_nome` VARCHAR(255) NOT NULL,
+  `CIDADE_ID` INT NOT NULL,
   PRIMARY KEY (`PESSOA_CPF`, `nome`),
   CONSTRAINT `fk_ENDERECO_PESSOA`
     FOREIGN KEY (`PESSOA_CPF`)
     REFERENCES `controleGames_APS_BD`.`PESSOA` (`CPF`),
   CONSTRAINT `fk_ENDERECO_CIDADE1`
-    FOREIGN KEY (`CIDADE_nome`)
-    REFERENCES `controleGames_APS_BD`.`CIDADE` (`nome`));
+    FOREIGN KEY (`CIDADE_ID`)
+    REFERENCES `controleGames_APS_BD`.`CIDADE` (`ID`));
 
 
 -- -----------------------------------------------------
@@ -97,7 +100,7 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`CLIENTE` ;
 
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`CLIENTE` (
   `PESSOA_CPF` CHAR(11) NOT NULL,
-  `usuario` VARCHAR(20) NOT NULL,
+  `usuario` INT NOT NULL,
   `ultima_compra` DATE NULL,
   `email` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`PESSOA_CPF`),
@@ -131,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`FUNCIONARIO` (
 DROP TABLE IF EXISTS `controleGames_APS_BD`.`SUPERVISOR` ;
 
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`SUPERVISOR` (
-  `usuario` VARCHAR(20) NOT NULL,
+  `usuario` INT NOT NULL,
   `FUNCIONARIO_PESSOA_CPF` CHAR(11) NOT NULL,
   PRIMARY KEY (`FUNCIONARIO_PESSOA_CPF`),
   UNIQUE(`usuario`),
@@ -159,7 +162,6 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`FISCALIZADO_POR` (
   CONSTRAINT `fk_FISCALIZADO_POR_SUPERVISOR1`
     FOREIGN KEY (`SUPERVISOR_FUNCIONARIO_PESSOA_CPF`)
     REFERENCES `controleGames_APS_BD`.`SUPERVISOR` (`FUNCIONARIO_PESSOA_CPF`));
-
 
 
 
@@ -381,36 +383,46 @@ INSERT INTO `controleGames_APS_BD`.`ESTADO` (`nome`) VALUES ('Sao Paulo');
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`CIDADE`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_nome`) VALUES ('Campo Mourao', 'Parana');
-INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_nome`) VALUES ('Maringa', 'Parana');
-INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_nome`) VALUES ('Jundiai', 'Sao Paulo');
-INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_nome`) VALUES ('Florianopolis', 'Santa Catarina');
+INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_ID`) VALUES ('Campo Mourao', 1);
+INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_ID`) VALUES ('Maringa', 1);
+INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_ID`) VALUES ('Jundiai', 3);
+INSERT INTO `controleGames_APS_BD`.`CIDADE` (`nome`, `ESTADO_ID`) VALUES ('Florianopolis', 2);
 
 
 
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`ENDERECO`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('78234536494', 'Rua', 'Palmeira', 59, 'Arvoredo', 98765400, 'Campo Mourao');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('11736653660', 'Avenida', 'Capitao Indio Bandeira', 829, 'Centro', 87359005, 'Campo Mourao');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('52867465435', 'Praca', 'Constantinopla', 42, 'Prometheus', 78694200, 'Maringa');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('73314993510', 'Rua', 'Capoeira', 489, 'Centro', 87298489, 'Jundiai');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('12345567898', 'Avenida', '29 de Novembro', 1580, 'Centro', 87260278, 'Florianopolis');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('56380781188', 'Rua', 'Pombo', 125, 'Floriano das Neves', 12978942, 'Jundiai');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('54651643108', 'Praca', 'João Alvarez', 1470, 'Centro', 12345678, 'Florianopolis');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('12490072323', 'Avenida', 'Iamar J. Santos', 375, 'Ocarina', 78945612, 'Maringa');
-INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_nome`) VALUES ('90146845170', 'Rua', 'José Borges', 441, 'Centro', 35715982, 'Campo Mourao');
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('78234536494', 'Rua', 'Palmeira', 59, 'Arvoredo', 98765400, 1);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('11736653660', 'Avenida', 'Capitao Indio Bandeira', 829, 'Centro', 87359005, 1);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('52867465435', 'Praca', 'Constantinopla', 42, 'Prometheus', 78694200, 2);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('73314993510', 'Rua', 'Capoeira', 489, 'Centro', 87298489, 3);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('12345567898', 'Avenida', '29 de Novembro', 1580, 'Centro', 87260278, 4);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('56380781188', 'Rua', 'Pombo', 125, 'Floriano das Neves', 12978942, 3);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('54651643108', 'Praca', 'João Alvarez', 1470, 'Centro', 12345678, 4);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('12490072323', 'Avenida', 'Iamar J. Santos', 375, 'Ocarina', 78945612, 2);
+INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome`, `numero`, `bairro`, `CEP`, `CIDADE_ID`) VALUES ('90146845170', 'Rua', 'José Borges', 441, 'Centro', 35715982, 1);
 
+
+-- -----------------------------------------------------
+-- Data for table `controleGames_APS_BD`.`USUARIO`
+-- -----------------------------------------------------
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('romana', '123@123');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('camaraJose', '456@456');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('demonioDaGaroa', '1589%$#789');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('mWessel', 'oij789qwd');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('Godoy', 'kkJ2F4er');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('mlee', 'sup123');
 
 
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`CLIENTE`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `senha`, `ultima_compra`, `email`) VALUES ('78234536494', 'romana', '123@123', '2017-02-15', 'jurema@romana.com');
-INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `senha`, `ultima_compra`, `email`) VALUES ('11736653660', 'camaraJose', '456@456', '2015-10-07', 'jose@camara.com');
-INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `senha`, `ultima_compra`, `email`) VALUES ('52867465435', 'demonioDaGaroa', '1589%$#789', '2017-01-20', 'fernandes@gmail.com');
-INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `senha`, `ultima_compra`, `email`) VALUES ('73314993510', 'mWessel', 'oij789qwd', '2010-05-15', 'mwessel@gmail.com');
-INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `senha`, `ultima_compra`, `email`) VALUES ('12345567898', 'Godoy', 'kkJ2F4er', '2016-12-02', 'godoy2017@hotmail.com');
+INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `ultima_compra`, `email`) VALUES ('78234536494', 1, '2017-02-15', 'jurema@romana.com');
+INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `ultima_compra`, `email`) VALUES ('11736653660', 2,'2015-10-07', 'jose@camara.com');
+INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `ultima_compra`, `email`) VALUES ('52867465435', 3,'2017-01-20', 'fernandes@gmail.com');
+INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `ultima_compra`, `email`) VALUES ('73314993510', 4, '2010-05-15', 'mwessel@gmail.com');
+INSERT INTO `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`, `usuario`, `ultima_compra`, `email`) VALUES ('12345567898', 5, '2016-12-02', 'godoy2017@hotmail.com');
 
 
 
@@ -428,7 +440,7 @@ INSERT INTO `controleGames_APS_BD`.`FUNCIONARIO` (`cracha`, `PESSOA_CPF`) VALUES
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`SUPERVISOR`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`SUPERVISOR` (`usuario`, `senha`, `FUNCIONARIO_PESSOA_CPF`) VALUES ('mlee', 'sup123', '90146845170');
+INSERT INTO `controleGames_APS_BD`.`SUPERVISOR` (`usuario`, `FUNCIONARIO_PESSOA_CPF`) VALUES (6, '90146845170');
 
 
 

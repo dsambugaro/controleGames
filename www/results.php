@@ -9,7 +9,7 @@
 ?>
         <p class="alert-danger text-center"><?=ucfirst($tableMin)?> não pode ser removid<?=$tratamento?>!<br><br>
             Erro: <?=$msg_erro?><br><br>
-            Entre em contato com o Administrador do Sistema</p>
+            Em caso de dúvidas: entre em contato com o Administrador do Sistema</p>
 <?php endif; ?>
 
 <?php
@@ -23,7 +23,7 @@
 ?>
         <p class="alert-danger text-center"><?=ucfirst($tableMin)?> não pode ser editad<?=$tratamento?>!<br><br>
             Erro: <?=$msg_erro?><br><br>
-            Entre em contato com o Administrador do Sistema</p>
+            Em caso de dúvidas: entre em contato com o Administrador do Sistema</p>
 <?php
     endif;
 ?>
@@ -39,7 +39,7 @@
 ?>
         <p class="alert-danger text-center"><?=ucfirst($tableMin)?> não pode ser adicionad<?=$tratamento?>!<br><br>
             Erro: <?=$msg_erro?><br><br>
-            Entre em contato com o Administrador do Sistema</p>
+            Em caso de dúvidas: entre em contato com o Administrador do Sistema</p>
 <?php
     endif;
 ?>
