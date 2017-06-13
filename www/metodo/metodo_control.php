@@ -1,4 +1,12 @@
 <?php
+
+    $campo_pesquisa = nome;
+    $referencia = nome;
+    $table = METODO;
+    $key = ID;
+    $tableMin = strtolower($table);
+    $tratamento = o;
+
     function insert_metodo($conexao, $nome_metodo){
         $insert = "INSERT INTO METODO(`nome`) VALUES ('{$nome_metodo}')";
         return mysqli_query($conexao, $insert);

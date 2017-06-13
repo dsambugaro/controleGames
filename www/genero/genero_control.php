@@ -1,5 +1,12 @@
 <?php
 
+    $campo_pesquisa = nome;
+    $referencia = nome;
+    $table = GENERO;
+    $key = ID;
+    $tableMin = strtolower($table);
+    $tratamento = o;
+
     function insert_genero($conexao, $nome_genero){
         $insert_genero = "INSERT INTO GENERO(`nome`) VALUES ('{$nome_genero}')";
         return mysqli_query($conexao, $insert_genero);

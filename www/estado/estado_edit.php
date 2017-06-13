@@ -3,8 +3,8 @@
     include '../bd_control/conecta.php';
     include '../bd_control/control.php';
     include 'estado_control.php';
+
     $ID = $_POST['edit'];
-    $table = ESTADO;
     $row = seleciona_tupla_simples($conexao, $table, $ID);
 ?>
     <div class="container">

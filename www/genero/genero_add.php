@@ -1,8 +1,6 @@
 <?php
     include '../cabecalho_interno.php';
-    $table = GENERO;
-    $tableMin = strtolower($table);
-    $tratamento = a;
+    include 'genero_control.php';
 ?>
     <div class="container">
         <div class="row">

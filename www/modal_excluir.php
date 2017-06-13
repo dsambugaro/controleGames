@@ -6,19 +6,23 @@
                 <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
             </div>
             <div class="modal-body">
-                Deseja realmente excluir este item?
+                Deseja realmente excluir este item: <strong id="item-deletar"></strong>?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="confirm();">Sim</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+                <form action="<?=$tableMin?>/delete.php" method="post">
+                    <input type="hidden" name="delete" id="id-deletar">
+                    <button class="btn btn-primary" value="Sim">Sim</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    function confirm(){
-        var form_del = document.getElementById('delete');
-        form_del.submit();
+    function confirmaDelete(referencia, id){
+        $('#delete-confirm').modal({show: true});
+        $('#item-deletar').text(referencia);
+        $('#id-deletar').val(id);
     }
 </script>

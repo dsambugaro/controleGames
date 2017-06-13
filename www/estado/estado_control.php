@@ -1,5 +1,12 @@
 <?php
 
+    $campo_pesquisa = nome;
+    $referencia = nome;
+    $table = ESTADO;
+    $key = ID;
+    $tableMin = strtolower($table);
+    $tratamento = o;
+
     function insert_estado($conexao, $nome_estado){
         $insert_estado = "INSERT INTO ESTADO(`nome`) VALUES ('{$nome_estado}')";
         return mysqli_query($conexao, $insert_estado);

@@ -1,8 +1,6 @@
 <?php
     include '../cabecalho_interno.php';
-    $table = PLATAFORMA;
-    $tableMin = strtolower($table);
-    $tratamento = a;
+    include 'plataforma_control.php';
 ?>
     <div class="container">
         <div class="row">

@@ -13,10 +13,7 @@
             </form>
         </li>
         <li>
-            <form action="<?=$tableMin?>/delete.php" method="post">
-                <input type="hidden" name="delete" value="<?=$row["{$key}"]?>">
-                <button class="btn btn-danger btn-xs" value="Deletar">Deletar</button>
-            </form>
+            <input type="button" class="btn btn-danger btn-xs" value="Deletar" onclick="confirmaDelete('<?=$row["{$referencia}"]?>','<?=$row["{$key}"]?>')">
         </li>
     </ul>
 </td>

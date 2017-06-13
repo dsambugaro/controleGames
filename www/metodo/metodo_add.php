@@ -1,8 +1,6 @@
 <?php
     include '../cabecalho_interno.php';
-    $table = METODO;
-    $tableMin = strtolower($table);
-    $tratamento = o;
+    include 'metodo_control.php';
 ?>
     <div class="container">
         <div class="row">

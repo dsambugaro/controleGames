@@ -1,8 +1,6 @@
 <?php
     include '../cabecalho_interno.php';
-    $table = ESTADO;
-    $tableMin = strtolower($table);
-    $tratamento = o;
+    include 'estado_control.php';
 ?>
     <div class="container">
         <div class="row">

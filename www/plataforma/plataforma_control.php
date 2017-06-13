@@ -1,5 +1,12 @@
 <?php
 
+    $campo_pesquisa = nome;
+    $referencia = nome;
+    $table = PLATAFORMA;
+    $key = ID;
+    $tableMin = strtolower($table);
+    $tratamento = a;
+
     function insert_plataforma($conexao, $nome_plataforma){
         $insert_plataforma = "INSERT INTO PLATAFORMA(`nome`) VALUES ('{$nome_plataforma}')";
         return mysqli_query($conexao, $insert_plataforma);

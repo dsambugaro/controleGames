@@ -3,12 +3,7 @@
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
     include 'estado/estado_control.php';
-
-    $campo_pesquisa = nome;
-    $table = ESTADO;
-    $key = ID;
-    $tableMin = strtolower($table);
-    $tratamento = o;
+    
     $rows = lista_tabela_simples($conexao, $table);
 ?>
 

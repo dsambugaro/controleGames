@@ -3,11 +3,6 @@
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
 
-    $campo_pesquisa = nome;
-    $table = METODO;
-    $key = ID;
-    $tableMin = strtolower($table);
-    $tratamento = o;
     $rows = lista_tabela_simples($conexao, $table);
 ?>
 
@@ -57,7 +52,7 @@
             </div>
         </div>
     </div>
-    
+
 <?php
     include "modal_excluir.php";
     include "rodape.php";

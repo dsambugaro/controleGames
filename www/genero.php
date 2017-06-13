@@ -4,11 +4,6 @@
     include 'bd_control/control.php';
     include 'genero/genero_control.php';
 
-    $campo_pesquisa = nome;
-    $table = GENERO;
-    $key = ID;
-    $tableMin = strtolower($table);
-    $tratamento = o;
     $rows = lista_tabela_simples($conexao, $table);
 ?>
 

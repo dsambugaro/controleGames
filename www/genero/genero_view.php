@@ -3,9 +3,8 @@
     include '../bd_control/conecta.php';
     include '../bd_control/control.php';
     include 'genero_control.php';
-    
+
     $ID = $_POST['view'];
-    $table = GENERO;
     $row = seleciona_tupla_simples($conexao, $table, $ID);
 ?>
     <div class="container">

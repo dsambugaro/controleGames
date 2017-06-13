@@ -4,11 +4,6 @@
     include 'bd_control/control.php';
     include 'plataforma/plataforma_control.php';
 
-    $campo_pesquisa = nome;
-    $table = PLATAFORMA;
-    $key = ID;
-    $tableMin = strtolower($table);
-    $tratamento = a;
     $rows = lista_tabela_simples($conexao, $table);
 ?>
 
@@ -60,7 +55,16 @@
             </div>
         </div>
     </div>
+
+    <?php
+        include "modal_excluir.php";
+    ?>
+
+
+
+
+
 <?php
-    include "modal_excluir.php";
+    // include "modal_excluir.php";
     include "rodape.php";
 ?>
