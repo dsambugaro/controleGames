@@ -5,7 +5,7 @@
         <meta http-equiv="content-language" content="pt-br">
         <meta name="author" content="Danilo Sambugaro e Rafael Soratto">
         <meta name="viewport" content="width=device-width, user-scalable=no">
-        <title>GameOver - controleGames</title>
+        <title>GameOver - Sistema de Gerenciamento</title>
 
         <script src = "lib/Jquery/jquery-3.2.1.min.js"></script>
         <link rel="stylesheet" href="lib/bootstrap-3.3.7/css/bootstrap.min.css">
