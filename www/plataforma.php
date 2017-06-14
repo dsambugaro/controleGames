@@ -56,15 +56,7 @@
         </div>
     </div>
 
-    <?php
-        include "modal_excluir.php";
-    ?>
-
-
-
-
-
 <?php
-    // include "modal_excluir.php";
+    include "modal_excluir.php";
     include "rodape.php";
 ?>
