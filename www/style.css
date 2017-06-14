@@ -9,10 +9,6 @@ body {
     right: 30%
 }
 
-.busca form button {
-    
-}
-
 .list-group-item:last-child {
   margin-bottom: 0;
   border-bottom-right-radius: 0px;
@@ -20,7 +16,7 @@ body {
 }
 
 select[readonly] {
-  background: #eee;
+  background: #eeeeee;
   pointer-events: none;
   touch-action: none;
 }
