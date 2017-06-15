@@ -2,6 +2,7 @@
     include 'cabecalho.php';
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
+    include 'metodo/metodo_control.php';
 
     $rows = lista_tabela_simples($conexao, $table);
 ?>

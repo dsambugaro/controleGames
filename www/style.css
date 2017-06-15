@@ -2,6 +2,9 @@ body {
     padding-top: 70px;
 }
 
+#over-home:hover {
+    color: #337ab7;
+}
 
 .busca {
     position: absolute;

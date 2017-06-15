@@ -21,7 +21,7 @@
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand active" href="index.php">GameOver</a>
+                    <a class="navbar-brand active" href="index.php"><span id="game-home">Game</span><span id="over-home">Over</span></a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="pessoa.php">Pessoas</a></li>
@@ -51,6 +51,32 @@
                 </ul>
             </div>
         </nav>
+        <script>
+            $('#game-home').mouseover(
+                function (){
+                    $('#over-home').css('color', '#337ab7');
+                    $('#game-home').css('color', '#ffffff');
+                }
+            );
+            $('#game-home').mouseout(
+                function (){
+                    $('#over-home').css('color', '#9d9d9d');
+                    $('#game-home').css('color', '#9d9d9d');
+                }
+            );
+            $('#over-home').mouseover(
+                function (){
+                    $('#over-home').css('color', '#337ab7');
+                    $('#game-home').css('color', '#ffffff');
+                }
+            );
+            $('#over-home').mouseout(
+                function (){
+                    $('#over-home').css('color', '#9d9d9d');
+                    $('#game-home').css('color', '#9d9d9d');
+                }
+            );
+        </script>
     </header>
     <body>
         <main>
