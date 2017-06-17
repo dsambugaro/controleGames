@@ -18,7 +18,7 @@
         foreach ($rows as $row):
         echo "<tr>";
         echo "<td>";
-        echo "{$row['nome']}";
+        echo "{$row["{$campo}"]}";
         echo "</td>";
         include 'acoes.php';
         echo "</tr>";

@@ -19,7 +19,6 @@
                     dataType: 'html',
                     success: function(retorno){
                         var resultado = document.getElementById("itens");
-                        console.log(retorno);
                         resultado.innerHTML = retorno;
                     }
                 });

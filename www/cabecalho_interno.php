@@ -39,6 +39,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mais<span class="caret"></span></a>
                         <ul class="dropdown-menu">
+                            <li><a href="../usuario.php">Usuários</a></li>
                             <li><a href="../estado.php">Estados</a></li>
                         </ul>
                     </li>
