@@ -52,8 +52,17 @@
 
             <div class="row">
                 <div class="col-md-8">
-                    <a href="pessoa_edit.php" class="btn btn-primary">Editar</a>
-                    <a href="../pessoa.php" class="btn btn-default">Voltar</a>
+                    <ul class="list-inline">
+                        <li>
+                            <form action="pessoa_edit.php" method="post">
+                                <input type="hidden" name="edit" value="<?=$row['CPF']?>">
+                                <button class="btn btn-primary">Editar</button>
+                            </form>
+                        </li>
+                        <li>
+                            <a href="../pessoa.php" class="btn btn-default">Voltar</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
     </div>

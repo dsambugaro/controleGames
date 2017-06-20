@@ -3,6 +3,7 @@
     include '../bd_control/conecta.php';
     include '../bd_control/control.php';
     include 'pessoa_control.php';
+    $url_busca = 'busca_pessoa_cidade.php';
 
 ?>
     <div class="container">

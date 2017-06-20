@@ -7,6 +7,7 @@
     $pessoa = seleciona_tupla_pessoa($conexao, $table, $cpf);
     $endereco = selecionaTuplaEndereco($conexao, $cpf);
     $estados = lista_tabela_simples($conexao, $table);
+    $url_busca = 'busca_pessoa_cidade.php';
 ?>
     <div class="container">
         <div class="row">

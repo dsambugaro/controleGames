@@ -78,14 +78,14 @@
     });
     $("#cidade").keypress( function(event){
         $( "#cidade" ).autocomplete({
-            source: 'busca_pessoa_cidade.php?campo=nome&key='+$("#estado").val()+'&table=CIDADE',
+            source: '<?=$url_busca?>?campo=nome&key='+$("#estado").val()+'&table=CIDADE',
         });
     });
     $( "#cidade" ).on( "autocompleteselect", function( event, ui ) {
         var buscar = ui.item.value;
         $.ajax({
             method: "post",
-            url: 'busca_pessoa_cidade.php?campo=nome&key='+$("#estado").val()+'&table=CIDADE',
+            url: '<?=$url_busca?>?campo=nome&key='+$("#estado").val()+'&table=CIDADE',
             data: 'acao=1&filtro='+buscar,
             dataType: 'json',
             success: function(retorno){

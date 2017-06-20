@@ -23,6 +23,17 @@
                 <a href="pessoa/pessoa_add.php" class="btn btn-primary pull-right h2">Nova Pessoa</a>
             </div>
         </div>
+        <div class="row">
+            <div class="form-group col-md-6 text-right">
+                <input type="radio" id="busca_nome" name="campo" value="nome_pessoa" checked>
+                <label for="busca_nome">Nome</label>
+            </div>
+            <div class="form-group col-md-6 text-left">
+                    <input type="radio" id="busca_cpf" name="campo" value="CPF">
+                    <label for="busca_cpf">CPF</label>
+            </div>
+            <input type="hidden" name="campo_busca" value="nome" id="campo_busca">
+        </div>
         <hr />
         <?php
             include 'results.php';
@@ -63,6 +74,6 @@
 
     <?php
         include "modal_excluir.php";
-        include "busca_control.php";
+        include "busca_com_filtro.php";
         include "rodape.php";
     ?>

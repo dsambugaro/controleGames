@@ -46,9 +46,9 @@
         return mysqli_fetch_assoc($resultado);
     }
 
-    function busca_por_nascimento($conexao, $campo, $buscar){
+    function busca_pessoa($conexao, $campo, $buscar){
         $resultados = array();
-        $busca = "SELECT C.*, E.nome as estado FROM PESSOA C JOIN ESTADO E ON C.ESTADO_ID = E.ID WHERE C.{$campo} LIKE '%{$buscar}%' ORDER BY C.{$campo}";
+        $busca = "SELECT * FROM PESSOA WHERE {$campo} LIKE '%{$buscar}%' ORDER BY {$campo}";
         $resultado = mysqli_query($conexao, $busca);
         while ($retorno = mysqli_fetch_assoc($resultado)) {
             array_push($resultados, $retorno);

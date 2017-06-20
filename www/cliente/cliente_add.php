@@ -1,5 +1,9 @@
 <?php
     include '../cabecalho_interno.php';
+    include '../bd_control/conecta.php';
+    include '../bd_control/control.php';
+    include '../pessoa/pessoa_control.php';
+    $url_busca = '../pessoa/busca_pessoa_cidade.php';
 ?>
     <div class="container" onload="checaUsoPessoa()">
         <div class="row">
