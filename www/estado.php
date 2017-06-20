@@ -3,7 +3,7 @@
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
     include 'estado/estado_control.php';
-    
+
     $rows = lista_tabela_simples($conexao, $table);
 ?>
 
@@ -57,5 +57,6 @@
     </div>
 <?php
     include "modal_excluir.php";
+    include "busca_control.php";
     include "rodape.php";
 ?>

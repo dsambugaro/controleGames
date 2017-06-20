@@ -3,10 +3,6 @@
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
     include 'empresa/empresa_control.php';
-    $table = EMPRESA;
-    $key = CNPJ;
-    $tableMin = strtolower($table);
-    $tratamento = a;
     $rows = lista_tabela_simples($conexao, $table);
 ?>
     <div class="container">

@@ -10,6 +10,9 @@
         <link rel="stylesheet" href="../lib/bootstrap-3.3.7/css/bootstrap.min.css">
         <script src = "../lib/bootstrap-3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="../style.css">
+        <script src="../lib/jQuery-ui/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="../lib/jQuery-ui/jquery-ui.theme.min.css">
+        <link rel="stylesheet" href="../lib/jQuery-ui/jquery-ui.min.css">
     </head>
     <header>
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -41,6 +44,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="../usuario.php">Usuários</a></li>
                             <li><a href="../estado.php">Estados</a></li>
+                            <li><a href="../cidade.php">Cidades</a></li>
                         </ul>
                     </li>
                 </ul>

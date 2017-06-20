@@ -1,12 +1,19 @@
 <?php
     include '../cabecalho_interno.php';
+    include '../bd_control/conecta.php';
+    include '../bd_control/control.php';
+    include 'pessoa_control.php';
+
 ?>
     <div class="container">
         <div class="row">
             <h3>Pessoa - Adicionar</h3>
         </div>
         <hr />
-        <formaction="#" method="post">
+        <?php
+            include '../results.php';
+        ?>
+        <form action="add.php" method="post">
             <?php include 'form_pessoa.php'; ?>
             <hr />
 

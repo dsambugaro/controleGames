@@ -1,5 +1,12 @@
 <?php
     include '../cabecalho_interno.php';
+    include '../bd_control/conecta.php';
+    include '../bd_control/control.php';
+    include 'pessoa_control.php';
+    $cpf = $_POST['view'];
+    $row = seleciona_tupla_pessoa($conexao, $table, $cpf);
+    $endereco = selecionaTuplaEndereco($conexao, $cpf);
+    $estados = lista_tabela_simples($conexao, $table);
 ?>
     <div class="container">
         <div class="row">
@@ -9,31 +16,35 @@
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>Nome</strong></p>
-                    <p>Lorem ipsum dolor</p>
+                    <p><?=$row['nome_pessoa']?></p>
                 </div>
                 <div class="form-group col-md-4">
                     <p><strong>CPF</strong></p>
-                    <p>999.999.999-99</p>
+                    <p><?=$row['CPF']?></p>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Nascimento</strong></p>
-                    <p>DD/MM/AAAA</p>
+                    <p><?=date('d/m/Y', strtotime($row['data_nasc_pessoa']))?></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <p><strong>Endereço</strong></p>
-                    <p>Rua Lorem ipsum dolor sit amet - 9999 - quod quod</p>
+                    <p><?=$endereco['logradouro']?> <?=$endereco['nome']?>, <?=$endereco['numero']?> - <?=$endereco['bairro']?></p>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
                     <p><strong>CEP</strong></p>
-                    <p>99999-999</p>
+                    <p><?=$endereco['CEP']?></p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Cidade</strong></p>
+                    <p><?=$endereco['cidade']?></p>
                 </div>
                 <div class="col-md-4">
                     <p><strong>Estado</strong></p>
-                    <p>UF</p>
+                    <p><?=$endereco['estado']?></p>
                 </div>
             </div>
             <br>

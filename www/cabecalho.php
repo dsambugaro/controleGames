@@ -47,6 +47,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="usuario.php">Usuários</a></li>
                             <li><a href="estado.php">Estados</a></li>
+                            <li><a href="cidade.php">Cidades</a></li>
                         </ul>
                     </li>
                 </ul>

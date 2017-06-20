@@ -32,7 +32,9 @@
                 <li class="dropdown">
                     <a class="btn btn-primary" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mais <span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="usuario.php">Usuários</a></li>
                         <li><a href="estado.php">Estados</a></li>
+                        <li><a href="cidade.php">Cidades</a></li>
                     </ul>
                 </li>
             </ul>

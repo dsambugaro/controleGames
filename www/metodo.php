@@ -56,5 +56,6 @@
 
 <?php
     include "modal_excluir.php";
+    include "busca_control.php";
     include "rodape.php";
 ?>

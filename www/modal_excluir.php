@@ -24,5 +24,6 @@
         $('#delete-confirm').modal({show: true});
         $('#item-deletar').text(referencia);
         $('#id-deletar').val(id);
+        console.log(id);
     }
 </script>

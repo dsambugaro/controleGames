@@ -10,7 +10,7 @@
         return $rows;
     }
 
-    function seleciona_tupla_simples($conexao, $tabela,$ID){
+    function seleciona_tupla_simples($conexao, $tabela, $ID){
         $select = "SELECT * FROM {$tabela} WHERE ID = {$ID}";
         $resultado = mysqli_query($conexao, $select);
         return mysqli_fetch_assoc($resultado);

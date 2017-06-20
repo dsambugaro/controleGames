@@ -13,14 +13,13 @@
     } else {
         $buscando = $_POST['filtro'];
         $tableMin = strtolower($table);
-        $key = $_POST['key'];
         $rows = busca_dinamica($conexao, $table, $campo, $buscando);
         foreach ($rows as $row):
-        echo "<tr>";
-        echo "<td>";
-        echo "{$row["{$campo}"]}";
-        echo "</td>";
-        include 'acoes.php';
-        echo "</tr>";
+            echo "<tr>";
+            echo "<td>";
+            echo "{$row["{$campo}"]}";
+            echo "</td>";
+            include 'acoes.php';
+            echo "</tr>";
         endforeach;
     }

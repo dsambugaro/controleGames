@@ -9,20 +9,20 @@
 ?>
     <div class="container">
         <div class="row">
-            <h3>Plataforma - Editar</h3>
+            <h3>Usuário - Editar</h3>
         </div>
         <hr />
         <br>
         <form action="edit.php" method="post">
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="usuario">Plataforma</label>
+                    <label for="usuario">Usuário</label>
                     <input type="text" class="form-control" id="usuario"
-                        placeholder="Plataforma" name="usuario_nome"
+                        placeholder="Usuário" name="usuario_nome"
                         value="<?=$row['user']?>" required
                     >
                     <input type="hidden" class="form-control"
-                        placeholder="Plataforma" name="id"
+                        placeholder="ID" name="id"
                         value="<?=$row['ID']?>"
                     >
                 </div>
