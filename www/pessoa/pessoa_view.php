@@ -6,7 +6,6 @@
     $cpf = $_POST['view'];
     $row = seleciona_tupla_pessoa($conexao, $table, $cpf);
     $endereco = selecionaTuplaEndereco($conexao, $cpf);
-    $estados = lista_tabela_simples($conexao, $table);
 ?>
     <div class="container">
         <div class="row">

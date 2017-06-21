@@ -19,13 +19,25 @@
     $senhaCrip = md5($senha);
 
     $email = $_POST['cliente_email'];
-    
 
-    if ((insert_pessoa($conexao, $cpf, $nome_pessoa, $nasc)) && (insert_end($conexao, $cpf, $logradouro, $end_nome, $end_num, $end_bairro, $end_cep, $id_cidade)) && (insert_cliente($conexao, $email) && (insert_usuario($conexao, $user, $senhaCrip)))) {
-        header("Location: ../pessoa/pessoa_add.php?add=1");
-        die();
-    } else {
-        $msg = mysqli_error($conexao);
-        header("Location: ../pessoa/pessoa_add.php?add=0&error={$msg}");
-        die();
+    $usar_pessoa = $_POST['usar_pessoa'];
+
+    if ($usar_pessoa == 1) {
+        if ((insert_usuario($conexao, $user, $senhaCrip)) && (insert_cliente($conexao, $cpf, $user, $email))) {
+            header("Location: ../cliente/cliente_add.php?add=1");
+            die();
+        } else {
+            $msg = mysqli_error($conexao);
+            header("Location: ../cliente/cliente_add.php?add=0&error={$msg}");
+            die();
+        }
+    } else{
+        if ((insert_cliente($conexao, $cpf, $user, $email)) && (insert_pessoa($conexao, $cpf, $nome_pessoa, $nasc)) && (insert_end($conexao, $cpf, $logradouro, $end_nome, $end_num, $end_bairro, $end_cep, $id_cidade)) && (insert_usuario($conexao, $user, $senhaCrip))) {
+            header("Location: ../cliente/cliente_add.php?add=1");
+            die();
+        } else {
+            $msg = mysqli_error($conexao);
+            header("Location: ../cliente/cliente_add.php?add=0&error={$msg}");
+            die();
+        }
     }

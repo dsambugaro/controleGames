@@ -26,6 +26,10 @@
             </div>
         </div>
         <hr />
+        <?php
+            include 'results.php';
+        ?>
+        <br>
         <div id="list" class="row text-center">
             <div class="table-responsive col-md-12">
                 <table class="table table-hover">

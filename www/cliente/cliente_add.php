@@ -11,6 +11,10 @@
             <h3>Cliente - Adicionar</h3>
         </div>
         <hr />
+        <?php
+            include '../results.php';
+        ?>
+        <br>
         <form action="add.php" method="post">
             <div class="row">
                 <div class="form-group col-md-12 text-right">
@@ -23,18 +27,14 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <input type="radio" value="add_yes" id="add_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();" checked >
+                    <input type="radio" value="0" id="add_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();" checked >
                     <label for="add_pessoa">Nova Pessoa</label>
                 </div>
                 <div class="form-group col-md-2">
-                    <input type="radio" value="add_no" id="no_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();">
+                    <input type="radio" value="1" id="no_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();">
                     <label for="no_pessoa">Pessoa Existente</label>
                 </div>
                 <div class="form-group col-md-6">
-                    <!-- <select class="form-control" id="pessoa_selecionada" onchange="getPessoa();" name="pessoa_selecionada" disabled>
-                        <option value=" ">Escolha uma pessoa...</option>
-
-                    </select> -->
                     <input type="text" class="form-control" name="pessoa_selecionada" id="pessoa_selecionada" disabled>
                 </div>
             </div>
@@ -45,15 +45,15 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="usuario">Usuário</label>
-                    <input type="text" class="form-control" id="usuario" placeholder="Usuário" name="cliente_user">
+                    <input type="text" class="form-control" id="usuario" placeholder="Usuário" name="cliente_user" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control" id="senha" placeholder="Senha" name="cliente_password">
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" name="cliente_password" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="email">E-mail</label>
-                    <input type="email" class="form-control" id="senha" placeholder="E-mail válido" name="cliente_email">
+                    <input type="email" class="form-control" id="email" placeholder="E-mail válido" name="cliente_email" required>
                 </div>
             </div>
             <hr />
