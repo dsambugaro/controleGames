@@ -88,7 +88,7 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`USUARIO` ;
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`USUARIO` (
   `ID` INT AUTO_INCREMENT,
   `user` VARCHAR(20) NOT NULL,
-  `senha` VARCHAR(45) NOT NULL,
+  `senha` VARCHAR(255) NOT NULL,
   UNIQUE(`user`),
   PRIMARY KEY (`ID`));
 
@@ -407,12 +407,12 @@ INSERT INTO `controleGames_APS_BD`.`ENDERECO` (`PESSOA_CPF`, `logradouro`, `nome
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`USUARIO`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('romana', '123@123');
-INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('camaraJose', '456@456');
-INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('demonioDaGaroa', '1589%$#789');
-INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('mWessel', 'oij789qwd');
-INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('Godoy', 'kkJ2F4er');
-INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('mlee', 'sup123');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('romana', '53e6086284353cb73d4979f08537d950');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('camaraJose', '5527af1a9848339f9d78e74b4b7472c3');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('demonioDaGaroa', 'bbc667e139476e37b5f5bd3d35b6ec6b');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('mWessel', '908d3f20d1d1473fb16bd7599cf47928');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('Godoy', '54ad4196220b983a194b7a22d9f68b23');
+INSERT INTO `controleGames_APS_BD`.`USUARIO` (`user`, `senha`) VALUES ('mlee', 'cb17bd2285f26466a477579632350588');
 
 
 -- -----------------------------------------------------

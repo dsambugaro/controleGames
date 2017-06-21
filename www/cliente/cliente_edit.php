@@ -6,7 +6,7 @@
             <h3>Cliente - Editar</h3>
         </div>
         <hr />
-        <formaction="#" method="post">
+        <form action="edit.php" method="post">
             <div class="row">
                 <div class="form-group col-md-4">
                     <input type="radio" value="add_yes" id="add_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();" >

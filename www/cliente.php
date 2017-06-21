@@ -2,6 +2,8 @@
     include 'cabecalho.php';
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
+    include 'cliente/cliente_control.php';
+    $rows = lista_cliente($conexao, $table);
 ?>
     <div class="container">
         <div class="row">
@@ -32,66 +34,24 @@
                             <th class="text-center">CPF</th>
                             <th class="text-center">Nome</th>
                             <th class="text-center">Usuário</th>
-                            <th class="text-center">Ativo?</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>999.999.999-99</td>
-                            <td>Dolor sit amet consectetur </td>
-                            <td>expetenda</td>
-                            <td>Sim</td>
-                            <td class="opcoes">
-                                <a class="btn btn-primary btn-xs" href="cliente/cliente_view.php">Visualizar</a>
-                                <a class="btn btn-warning btn-xs" href="cliente/cliente_edit.php">Editar</a>
-                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-confirm">Deletar</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>999.999.999-99</td>
-                            <td>Dolor sit amet consectetur </td>
-                            <td>expetenda</td>
-                            <td>Sim</td>
-                            <td class="opcoes">
-                                <a class="btn btn-primary btn-xs" href="cliente/cliente_view.php">Visualizar</a>
-                                <a class="btn btn-warning btn-xs" href="cliente/cliente_edit.php">Editar</a>
-                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-confirm">Deletar</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>999.999.999-99</td>
-                            <td>Dolor sit amet consectetur </td>
-                            <td>expetenda</td>
-                            <td>Sim</td>
-                            <td class="opcoes">
-                                <a class="btn btn-primary btn-xs" href="cliente/cliente_view.php">Visualizar</a>
-                                <a class="btn btn-warning btn-xs" href="cliente/cliente_edit.php">Editar</a>
-                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-confirm">Deletar</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>999.999.999-99</td>
-                            <td>Dolor sit amet consectetur </td>
-                            <td>expetenda</td>
-                            <td>Sim</td>
-                            <td class="opcoes">
-                                <a class="btn btn-primary btn-xs" href="cliente/cliente_view.php">Visualizar</a>
-                                <a class="btn btn-warning btn-xs" href="cliente/cliente_edit.php">Editar</a>
-                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-confirm">Deletar</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>999.999.999-99</td>
-                            <td>Dolor sit amet consectetur </td>
-                            <td>expetenda</td>
-                            <td>Sim</td>
-                            <td class="opcoes">
-                                <a class="btn btn-primary btn-xs" href="cliente/cliente_view.php">Visualizar</a>
-                                <a class="btn btn-warning btn-xs" href="cliente/cliente_edit.php">Editar</a>
-                                <a class="btn btn-danger btn-xs"  href="#" data-toggle="modal" data-target="#delete-confirm">Deletar</a>
-                            </td>
-                        </tr>
+                    <tbody id="itens">
+                        <?php
+                            foreach ($rows as $row):
+                        ?>
+                            <tr>
+                                <td><?=$row['PESSOA_CPF']?></td>
+                                <td><?=$row['nome']?></td>
+                                <td><?=$row['user']?></td>
+                                <?php
+                                    include 'acoes.php';
+                                ?>
+                            </tr>
+                        <?php
+                            endforeach;
+                        ?>
                     </tbody>
                 </table>
             </div>

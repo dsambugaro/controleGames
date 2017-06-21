@@ -47,7 +47,7 @@
     </div>
     <div class="form-group col-md-4">
         <label for="estado">Estado</label>
-        <select class="form-control" name="estado" id="estado" onchange="cidadeLimpa()" required>
+        <select class="form-control pessoa" name="estado" id="estado" onchange="cidadeLimpa()" required>
             <option value="">Escolha um estado</option>
             <?php
                 foreach ($estados as $estado):
