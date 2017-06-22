@@ -1,5 +1,5 @@
 <?php
-    $referencia = PESSOA_CPF;
+    $referencia = user;
     $table = CLIENTE;
     $key = PESSOA_CPF;
     $tableMin = strtolower($table);
@@ -41,15 +41,38 @@
         return mysqli_query($conexao, $delete);
     }
 
-    function busca_dinamica_pessoa($conexao, $campo, $filtro){
-        $resultados = array();
-        $busca = "SELECT P.*, E.*, C.nome AS cidade, ES.ID AS estado_id, ES.nome AS estado FROM PESSOA P, ENDERECO E
-                  JOIN CIDADE C ON E.CIDADE_ID = C.ID
-                  JOIN ESTADO ES ON ES.ID = C.ESTADO_ID
-                  WHERE P.{$campo} = '{$filtro}' AND E.PESSOA_CPF = P.CPF";
+    function busca_auto_completa_cliente($conexao, $campo, $buscar){
+        $busca = "SELECT {$campo} FROM CLIENTE C, PESSOA P, USUARIO U
+                    WHERE {$campo} LIKE '%{$buscar}%'
+                    AND P.CPF = C.PESSOA_CPF
+                    AND C.usuario = U.ID
+                    GROUP BY {$campo}
+                    ORDER BY {$campo}";
         $resultado = mysqli_query($conexao, $busca);
-        while ($retorno = mysqli_fetch_assoc($resultado)) {
-            array_push($resultados, $retorno);
+        $virgula = false;
+        $retorna = '[';
+        while ($res = mysqli_fetch_assoc($resultado)) {
+            if ($virgula) {
+                $retorna .= ', ';
+            } else {
+                $virgula = true;
+            }
+            $retorna .= json_encode($res["{$campo}"]);
+        }
+        $retorna .= ']';
+        return $retorna;
+    }
+
+    function busca_cliente($conexao, $campo, $buscar){
+        $resultados = array();
+        $busca = "SELECT C.PESSOA_CPF, P.nome_pessoa AS nome, U.user AS user FROM CLIENTE C
+                   JOIN PESSOA P ON C.PESSOA_CPF = P.CPF
+                   JOIN USUARIO U ON C.usuario = U.ID
+                   WHERE {$campo} LIKE '%{$buscar}%'
+                   ORDER BY {$campo}";
+        $resultado = mysqli_query($conexao, $busca);
+        while ($res = mysqli_fetch_assoc($resultado)) {
+            array_push($resultados, $res);
         }
         return $resultados;
     }

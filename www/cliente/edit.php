@@ -2,6 +2,7 @@
     include '../bd_control/conecta.php';
     include '../usuario/usuario_control.php';
     include '../pessoa/busca_pessoa_control.php';
+    include '../pessoa/pessoa_control.php';
     include 'cliente_control.php';
 
     $nome_pessoa = $_POST['pessoa_nome'];
@@ -23,10 +24,8 @@
     $id_user = $_POST['id_user'];
 
     $email = $_POST['cliente_email'];
-    alter_pessoa($conexao, $cpf, $nome_pessoa, $nasc, $id);
-    // alter_end($conexao, $cpf, $logradouro, $end_nome, $end_num, $end_bairro, $end_cep, $id_cidade);
 
-    if ((alter_usuario($conexao, $user, $senhaCrip, $id_user)) && (alter_cliente($conexao, $cpf, $user, $email))) {
+    if ((alter_pessoa($conexao, $cpf, $nome_pessoa, $nasc, $id)) && (alter_end($conexao, $cpf, $logradouro, $end_nome, $end_num, $end_bairro, $end_cep, $id_cidade)) && (alter_usuario($conexao, $user, $senhaCrip, $id_user)) && (alter_cliente($conexao, $cpf, $user, $email))) {
         header("Location: ../cliente.php?alter=1");
         die();
     } else {

@@ -12,18 +12,37 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group h2">
-                    <input name="busca" class="form-control" id="buscaClientes" type="text" placeholder="Pesquisar Clientes">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                    <input name="busca" class="form-control" id="busca" type="text" placeholder="Pesquisar Clientes">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <a href="cliente/cliente_add.php" class="btn btn-primary pull-right h2">Novo Cliente</a>
             </div>
+        </div>
+        <div class="row text-center ">
+            <ul class="list-inline">
+                <li>
+                    <div class="form-group">
+                        <input type="radio" id="busca_nome" name="campo" value="nome_pessoa" checked>
+                        <label for="busca_nome">Nome</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                            <input type="radio" id="busca_cpf" name="campo" value="PESSOA_CPF">
+                            <label for="busca_cpf">CPF</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <input type="radio" id="busca_user" name="campo" value="user">
+                        <label for="busca_user">Usuário</label>
+                    </div>
+                </li>
+            </ul>
+            <input type="hidden" name="campo_busca" value="nome" id="campo_busca">
         </div>
         <hr />
         <?php
@@ -64,5 +83,6 @@
 
 <?php
     include "modal_excluir.php";
+    include "busca_com_filtro.php";
     include "rodape.php";
 ?>

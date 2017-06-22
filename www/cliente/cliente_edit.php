@@ -25,6 +25,7 @@
             <?php
                 include '../pessoa/form_pessoa.php';
             ?>
+            <input type="hidden" name="id_antigo" id="id_antigo">
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="usuario">Usuário</label>

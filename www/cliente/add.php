@@ -32,7 +32,7 @@
             die();
         }
     } else{
-        if ((insert_cliente($conexao, $cpf, $user, $email)) && (insert_pessoa($conexao, $cpf, $nome_pessoa, $nasc)) && (insert_end($conexao, $cpf, $logradouro, $end_nome, $end_num, $end_bairro, $end_cep, $id_cidade)) && (insert_usuario($conexao, $user, $senhaCrip))) {
+        if ((insert_pessoa($conexao, $cpf, $nome_pessoa, $nasc)) && (insert_end($conexao, $cpf, $logradouro, $end_nome, $end_num, $end_bairro, $end_cep, $id_cidade)) && (insert_usuario($conexao, $user, $senhaCrip)) && (insert_cliente($conexao, $cpf, $user, $email))) {
             header("Location: ../cliente/cliente_add.php?add=1");
             die();
         } else {
