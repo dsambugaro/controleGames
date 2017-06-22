@@ -64,10 +64,17 @@
             <hr />
 
             <div class="row">
-                <div class="col-md-8">
-                    <a href="cliente_edit.php" class="btn btn-primary">Editar</a>
-                    <a href="../cliente.php" class="btn btn-default">Voltar</a>
-                </div>
+                <ul class="list-inline">
+                    <li>
+                        <form action="cliente_edit.php" method="post">
+                            <input type="hidden" name="edit" value="<?=$cliente['PESSOA_CPF']?>">
+                            <button class="btn btn-primary">Editar</button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="../cliente.php" class="btn btn-default">Voltar</a>
+                    </li>
+                </ul>
             </div>
     </div>
     <?php

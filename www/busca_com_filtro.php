@@ -14,7 +14,6 @@
             success: function(retorno){
                 var resultado = document.getElementById("itens");
                 resultado.innerHTML = retorno;
-                console.log(retorno);
             }
         });
     })
