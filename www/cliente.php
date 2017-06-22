@@ -3,7 +3,7 @@
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
     include 'cliente/cliente_control.php';
-    $rows = lista_cliente($conexao, $table);
+    $rows = lista_cliente($conexao);
 ?>
     <div class="container">
         <div class="row">
@@ -16,7 +16,6 @@
                     <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                 </div>
             </div>
-
             <div class="col-md-3">
                 <a href="cliente/cliente_add.php" class="btn btn-primary pull-right h2">Novo Cliente</a>
             </div>
@@ -25,7 +24,7 @@
             <ul class="list-inline">
                 <li>
                     <div class="form-group">
-                        <input type="radio" id="busca_nome" name="campo" value="nome_pessoa" checked>
+                        <input type="radio" id="busca_nome" name="campo" value="nome_pessoa">
                         <label for="busca_nome">Nome</label>
                     </div>
                 </li>
@@ -37,12 +36,11 @@
                 </li>
                 <li>
                     <div class="form-group">
-                        <input type="radio" id="busca_user" name="campo" value="user">
+                        <input type="radio" id="busca_user" name="campo" value="user" checked>
                         <label for="busca_user">Usuário</label>
                     </div>
                 </li>
             </ul>
-            <input type="hidden" name="campo_busca" value="nome" id="campo_busca">
         </div>
         <hr />
         <?php
