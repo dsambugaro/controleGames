@@ -29,8 +29,8 @@
                             <li><a href="../metodo.php">Métodos de Pagamento</a></li>
                         </ul>
                     </li>
-                    <li><a href="funcionario.php">Funcionarios</a></li>
-                    <li><a href="supervisor.php">Supervisores</a></li>
+                    <li><a href="../funcionario.php">Funcionarios</a></li>
+                    <li><a href="../supervisor.php">Supervisores</a></li>
                     <li class="dropdown">
                         <a href="../jogos.php" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Jogos<span class="caret"></span></a>
                         <ul class="dropdown-menu">

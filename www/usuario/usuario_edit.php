@@ -15,7 +15,7 @@
         <br>
         <form action="edit.php" method="post">
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="usuario">Usuário</label>
                     <input type="text" class="form-control" id="usuario"
                         placeholder="Usuário" name="usuario_nome"
@@ -26,11 +26,17 @@
                         value="<?=$row['ID']?>"
                     >
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control" id="senha"
-                        placeholder="Senha" name="usuario_senha"
-                        value="<?=$row['senha']?>" required>
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" name="usuario_senha" required disabled>
+                    <input type="hidden" class="form-control" id="senhaCrip" name="senhaCrip">
+                </div>
+                <div class="form-group col-md-4">
+                    <br><br>
+                    <input type="radio" value="1" id="change_senha" name="troca_senha" onclick="$('#senha').prop('disabled', false);">
+                    <label for="change_senha">Trocar Senha</label>
+                    <input type="radio" value="0" id="no_senha" name="troca_senha" onclick="$('#senha').prop('disabled', true)" checked>
+                    <label for="no_senha">Manter Senha</label>
                 </div>
             </div>
             <div class="row">

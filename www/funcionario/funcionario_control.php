@@ -5,7 +5,6 @@
     $tableMin = strtolower($table);
     $tratamento = o;
 
-
     function lista_funcionario($conexao){
         $rows = array();
         $select = "SELECT F.PESSOA_CPF AS CPF, F.cracha as cracha, P.nome_pessoa as nome, FP.SUPERVISOR_FUNCIONARIO_PESSOA_CPF as supervisor
@@ -40,8 +39,13 @@
         return mysqli_fetch_assoc($resultado);
     }
 
-    function insert_funcionario($conexao, $cpf, $cracha, $tel){
-        $insert = "INSERT INTO FUNCIONARIO VALUES ('{$cpf}',{$cracha}, {$tel})";
+    function insert_funcionario($conexao, $cpf, $tel){
+        $insert = "INSERT INTO FUNCIONARIO(`PESSOA_CPF`, `telefone`) VALUES ('{$cpf}', {$tel})";
+        return mysqli_query($conexao, $insert);
+    }
+
+    function define_supervisor($conexao, $cpf, $supervisor){
+        $insert = "INSERT INTO FISCALIZADO_POR VALUES ('{$cpf}', {$supervisor})";
         return mysqli_query($conexao, $insert);
     }
 

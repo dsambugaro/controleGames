@@ -47,7 +47,7 @@
                     <br><br>
                     <input type="radio" value="1" id="change_senha" name="troca_senha" onclick="$('#senha').prop('disabled', false);">
                     <label for="change_senha">Trocar Senha</label>
-                    <input type="radio" value="0" id="no_senha" name="troca_senha" onclick="$('#senha').prop('disabled', true)" checked>
+                    <input type="radio" value="0" id="no_senha" name="troca_senha" onclick="$('#senha').prop('disabled', true); $('#senha').val('');" checked>
                     <label for="no_senha">Manter Senha</label>
                 </div>
             </div>

@@ -116,4 +116,7 @@
 
         }
     }
+    $(document).ready(function(){
+        $("#nome").focus();
+    });
 </script>
