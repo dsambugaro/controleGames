@@ -4,7 +4,7 @@
     $key = PESSOA_CPF;
     $tableMin = strtolower($table);
     $tratamento = o;
-
+    
     function lista_funcionario($conexao){
         $rows = array();
         $select = "SELECT F.PESSOA_CPF AS CPF, F.cracha as cracha, P.nome_pessoa as nome, FP.SUPERVISOR_FUNCIONARIO_PESSOA_CPF as supervisor
