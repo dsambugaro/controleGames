@@ -9,7 +9,7 @@
     </div>
     <div class="form-group col-md-4">
         <label for="cpf">CPF</label>
-        <input type="text" class="form-control pessoa" id="cpf" placeholder="CPF sem pontos ou traço" name="pessoa_cpf" required>
+        <input type="text" class="form-control pessoa" id="cpf" placeholder="CPF sem pontos ou traço" name="pessoa_cpf" maxlength="11" required>
     </div>
     <div class="form-group col-md-4">
         <label for="nascimento">Data de Nascimento</label>

@@ -1,62 +1,94 @@
 <?php
     include '../cabecalho_interno.php';
+    include '../bd_control/conecta.php';
+    include '../bd_control/control.php';
+    include '../pessoa/pessoa_control.php';
+    include '../supervisor/supervisor_control.php';
+    include 'funcionario_control.php';
+
+    $ID = $_POST['edit'];
+    $funcionario = seleciona_tupla_funcionario($conexao, $ID);
+    $pessoa = seleciona_tupla_pessoa($conexao, 'PESSOA', $ID);
+    $endereco = selecionaTuplaEndereco($conexao, $ID);
+    $estados = lista_tabela_simples($conexao, $table);
+    $url_busca = '../pessoa/busca_pessoa_cidade.php';
+    $supervisores = lista_supervisores($conexao);
 ?>
-
-
-    <div class="container">
+    <div class="container" onload="checaUsoPessoa()">
         <div class="row">
-            <h3>Funcionário  - Editar</h3>
+            <h3>Funcionário - Editar</h3>
         </div>
         <hr />
-        <formaction="#" method="post">
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <input type="radio" value="add_yes" id="add_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();" >
-                    <label for="add_pessoa">Nova Pessoa</label>
-                </div>
-                <div class="form-group col-md-2">
-                    <input type="radio" value="add_no" id="no_pessoa" name="usar_pessoa" onclick="checaUsoPessoa();" checked >
-                    <label for="no_pessoa">Pessoa Existente</label>
-                </div>
-                <div class="form-group col-md-6">
-                    <select class="form-control" id="pessoa_selecionada" onchange="getPessoa();" name="pessoa_selecionada" disabled>
-                        <option value="0">Escolha uma pessoa...</option>
-                        <option value="12345678912">12345678912</option>
-                        <option value="15975315975">15975315975</option>
-                        <option value="23645789875">23645789875</option>
-                    </select>
-                </div>
-            </div>
+        <?php
+            include '../results.php';
+        ?>
+        <br>
+        <form action="edit.php" method="post">
             <?php
                 include '../pessoa/form_pessoa.php';
             ?>
+            <input type="hidden" name="id_antigo" id="id_antigo">
             <hr />
-
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="cadastro">Cadastro</label>
-                    <input type="text" class="form-control" id="Cadastro" placeholder="cadastro" name="funcionario">
+                    <label for="cracha">Cadastro</label>
+                    <input type="text" class="form-control" id="cracha" placeholder="Cadastro" name="funcionario_cad" readonly required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" class="form-control" id="telefone" placeholder="Telefone com DDD" name="funcionario_telefone" maxlength="11" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="supervisor">Supervisor</label>
+                    <select class="form-control" id="supervisor" placeholder="Supervisor" name="supervisor" required>
+                        <option value="NULL">Não possui</option>
+                        <?php
+                            foreach ($supervisores as $supervisor):
+                        ?>
+                                <option value="<?=$supervisor['FUNCIONARIO_PESSOA_CPF']?>">
+                                    <?=$supervisor['nome']?>
+                                </option>
+                        <?php
+                            endforeach;
+                        ?>
+                    </select>
                 </div>
             </div>
             <hr />
 
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <button type="submit" class="btn btn-primary">Salvar</button>
                     <a href="../funcionario.php" class="btn btn-default">Cancelar</a>
-                </div>
-                <div class="col-md-4 text-right">
-                    <a href="#" data-toggle="modal" data-target="#delete-confirm" class="btn btn-danger">Deletar</a>
                 </div>
             </div>
         </form>
     </div>
-    <script src="../usar_pessoa.js"></script>
     <script>
-        $(document).ready = checaUsoPessoa();
-    </script>
+    $('#telefone').keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
 
-    <?php
-        include '../modal_excluir.php';
-        include '../rodape_interno.php';
-    ?>
+    $("#telefone").val('<?=$funcionario['telefone']?>');
+    $("#cracha").val('<?=$funcionario['cracha']?>');
+    <?php $sup = ($funcionario['supervisor'] == NULL) ? "NULL":$funcionario['supervisor'] ?>
+    $("#supervisor").val('<?=$sup?>');
+
+    $("#nome").val('<?=$pessoa['nome_pessoa']?>');
+    $("#cpf").val('<?=$pessoa['CPF']?>');
+    $("#id_antigo").val('<?=$pessoa['CPF']?>');
+    $("#nascimento").val('<?=$pessoa['data_nasc_pessoa']?>');
+    $("#logradouro").val('<?=$endereco['logradouro']?>');
+    $("#nome_end").val('<?=$endereco['nome']?>');
+    $("#num").val(<?=$endereco['numero']?>);
+    $("#bairro").val('<?=$endereco['bairro']?>');
+    $("#cep").val(<?=$endereco['CEP']?>);
+    $("#cidade").val('<?=$endereco['cidade']?>');
+    $("#cidade_valida").val('<?=$endereco['cidade']?>');
+    $("#id_cidade").val('<?=$endereco['CIDADE_ID']?>');
+    var cidade = document.getElementById("cidade");
+    cidade.removeAttribute('readonly');
+    </script>
+<?php
+    include '../rodape_interno.php';
+?>

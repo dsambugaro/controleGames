@@ -1,10 +1,10 @@
 <?php
     $referencia = cracha;
     $table = FUNCIONARIO;
-    $key = PESSOA_CPF;
+    $key = CPF;
     $tableMin = strtolower($table);
     $tratamento = o;
-    
+
     function lista_funcionario($conexao){
         $rows = array();
         $select = "SELECT F.PESSOA_CPF AS CPF, F.cracha as cracha, P.nome_pessoa as nome, FP.SUPERVISOR_FUNCIONARIO_PESSOA_CPF as supervisor
@@ -29,11 +29,10 @@
     }
 
     function seleciona_tupla_funcionario($conexao, $ID){
-        $select = "SELECT F.*, P.nome_pessoa AS supervisor, S.FUNCIONARIO_PESSOA_CPF AS supervisor_cpf
-                   FROM FUNCIONARIO F
-                   JOIN FISCALIZADO_POR FP ON FP.FUNCIONARIO_PESSOA_CPF = F.PESSOA_CPF
-                   JOIN SUPERVISOR S ON FP.SUPERVISOR_FUNCIONARIO_PESSOA_CPF= S.FUNCIONARIO_PESSOA_CPF
-                   JOIN PESSOA P ON S.FUNCIONARIO_PESSOA_CPF = P.CPF
+        $select = "SELECT F.PESSOA_CPF AS CPF, F.cracha as cracha, P.nome_pessoa as nome, F.telefone, FP.SUPERVISOR_FUNCIONARIO_PESSOA_CPF as supervisor
+                    FROM FUNCIONARIO F
+                    JOIN PESSOA P ON F.PESSOA_CPF = P.CPF
+                    JOIN FISCALIZADO_POR FP ON FP.FUNCIONARIO_PESSOA_CPF = F.PESSOA_CPF
                    WHERE PESSOA_CPF = '{$ID}'";
         $resultado = mysqli_query($conexao, $select);
         return mysqli_fetch_assoc($resultado);
@@ -49,8 +48,8 @@
         return mysqli_query($conexao, $insert);
     }
 
-    function alter_funcionario($conexao, $cpf, $cracha, $email){
-        $insert = "UPDATE FUNCIONARIO SET cracha = {$cracha}), telefone = {$tel} WHERE PESSOA_CPF = '{$cpf}'";
+    function alter_funcionario($conexao, $cpf, $tel){
+        $insert = "UPDATE FUNCIONARIO SET telefone = {$tel} WHERE PESSOA_CPF = '{$cpf}'";
         return mysqli_query($conexao, $insert);
     }
 

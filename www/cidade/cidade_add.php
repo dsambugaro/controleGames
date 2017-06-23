@@ -23,7 +23,7 @@
                 <div class="form-group col-md-6">
                     <label for="estado">Estado</label>
                     <select class="form-control" name="estado" id="estado" required>
-                        <option value="0">Escolha um estado</option>
+                        <option value="">Escolha um estado</option>
                         <?php
                             foreach ($rows as $row):
                         ?>

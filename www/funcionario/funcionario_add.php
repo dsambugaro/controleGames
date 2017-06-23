@@ -2,9 +2,11 @@
     include '../cabecalho_interno.php';
     include '../bd_control/conecta.php';
     include '../bd_control/control.php';
-    $url_busca = '../pessoa/busca_pessoa_cidade.php';
     include 'funcionario_control.php';
+    include '../supervisor/supervisor_control.php';
+    $url_busca = '../pessoa/busca_pessoa_cidade.php';
     $pessoa = lista_tabela_simples($conexao, 'PESSOA');
+    $supervisores = lista_supervisores($conexao);
 ?>
     <div class="container" onload="checaUsoPessoa()">
         <div class="row">
@@ -44,11 +46,22 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="telefone">Telefone</label>
-                    <input type="text" class="form-control" id="telefone" placeholder="Telefone com DDD" name="funcionario_telefone" required>
+                    <input type="text" class="form-control" id="telefone" placeholder="Telefone com DDD" name="funcionario_telefone" maxlength="11" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="supervisor">Supervisor</label>
-                    <input type="text" class="form-control" id="supervisor" placeholder="Supervisor" name="supervisor" required>
+                    <select class="form-control" id="supervisor" placeholder="Supervisor" name="supervisor" required>
+                        <option value="NULL">Não possui</option>
+                        <?php
+                            foreach ($supervisores as $supervisor):
+                        ?>
+                                <option value="<?=$supervisor['FUNCIONARIO_PESSOA_CPF']?>">
+                                    <?=$supervisor['nome']?>
+                                </option>
+                        <?php
+                            endforeach;
+                        ?>
+                    </select>
                 </div>
             </div>
             <hr />
@@ -62,6 +75,11 @@
         </form>
     </div>
     <script src="../pessoa_usar.js"></script>
+    <script>
+    $('#telefone').keyup(function () {
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
+    </script>
 <?php
     include '../pessoa_usar.php';
     include '../rodape_interno.php';

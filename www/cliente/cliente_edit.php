@@ -61,7 +61,6 @@
             </div>
         </form>
     </div>
-    <script src="../pessoa_usar.js"></script>
     <script>
         $("#usuario").val('<?=$cliente['user']?>');
         $("#id_user").val('<?=$cliente['usuario']?>');
@@ -82,7 +81,6 @@
         $("#id_cidade").val('<?=$endereco['CIDADE_ID']?>');
         var cidade = document.getElementById("cidade");
         cidade.removeAttribute('readonly');
-
     </script>
 <?php
     include '../rodape_interno.php';

@@ -15,8 +15,7 @@
 
     $tel = $_POST['funcionario_telefone'];
     $supervisor = $_POST['supervisor'];
-
-
+    
     $usar_pessoa = $_POST['usar_pessoa'];
 
     if ($usar_pessoa == 1) {

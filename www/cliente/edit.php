@@ -1,7 +1,6 @@
 <?php
     include '../bd_control/conecta.php';
     include '../usuario/usuario_control.php';
-    include '../pessoa/busca_pessoa_control.php';
     include '../pessoa/pessoa_control.php';
     include 'cliente_control.php';
 
