@@ -36,7 +36,7 @@
                         <tr>
                             <th class="text-center">CNPJ</th>
                             <th class="text-center">Nome</th>
-                            <th class="text-center">Última compra</th>
+                            <th class="text-center">Telefone</th>
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
@@ -47,7 +47,7 @@
                         <tr>
                             <td><?=$row['CNPJ']?></td>
                             <td><?=$row['nome']?></td>
-                            <td><?=date('d/m/Y', strtotime($row['ultima_compra']))?></td>
+                            <td><?=$row['telefone']?></td>
                             <?php
                                 include 'acoes.php';
                             ?>

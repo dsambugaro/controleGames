@@ -1,5 +1,5 @@
 <?php include '../cabecalho_interno.php'; ?>
-<script src="../jogos_pedido.js.js"></script>
+<script src="../jogos_pedido.js"></script>
     <div class="container">
         <div class="row">
             <h3>Pedido - Adicionar</h3>

@@ -173,7 +173,7 @@ DROP TABLE IF EXISTS `controleGames_APS_BD`.`EMPRESA` ;
 CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`EMPRESA` (
   `CNPJ` CHAR(14) NOT NULL,
   `nome` VARCHAR(255) NOT NULL,
-  `ultima_compra` DATE NULL,
+  `telefone` CHAR(11) NULL,
   PRIMARY KEY (`CNPJ`));
 
 
@@ -476,11 +476,11 @@ INSERT INTO `controleGames_APS_BD`.`FISCALIZADO_POR` (`FUNCIONARIO_PESSOA_CPF`,`
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`EMPRESA`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `ultima_compra`) VALUES ('27082686000163', 'RockStar', '2017-02-17');
-INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `ultima_compra`) VALUES ('93111580000175', 'Activision  Blizzard', '2017-01-25');
-INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `ultima_compra`) VALUES ('38644428000140', 'Ubisoft', '2016-12-29');
-INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `ultima_compra`) VALUES ('47462545000183', 'Nintendo', '2017-05-30');
-INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `ultima_compra`) VALUES ('62313357000187', 'Eletronic Arts', '2016-11-25');
+INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `telefone`) VALUES ('27082686000163', 'RockStar', '55121345678');
+INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `telefone`) VALUES ('93111580000175', 'Activision  Blizzard', '11258369458');
+INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `telefone`) VALUES ('38644428000140', 'Ubisoft', '99123789654');
+INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `telefone`) VALUES ('47462545000183', 'Nintendo', '21258741369');
+INSERT INTO `controleGames_APS_BD`.`EMPRESA` (`CNPJ`, `nome`, `telefone`) VALUES ('62313357000187', 'Eletronic Arts', '12365478955');
 
 
 

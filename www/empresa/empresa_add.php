@@ -1,10 +1,15 @@
-<?php include '../cabecalho_interno.php'; ?>
+<?php
+    include '../cabecalho_interno.php';
+    include 'empresa_control.php';
+?>
     <div class="container">
         <div class="row">
             <h3>Empresa - Adicionar</h3>
         </div>
         <hr />
-        <formaction="#" method="post">
+        <?php include '../results.php'; ?>
+        <br>
+        <form action="add.php" method="post">
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="nome">Nome</label>
@@ -12,11 +17,11 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="cnpj">CNPJ</label>
-                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ sem pontuação" name="empresa_cnpj" required>
+                    <input type="text" class="form-control" id="cnpj" placeholder="CNPJ sem pontuação" name="empresa_cnpj" maxlength="14" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="tel">Telefone</label>
-                    <input type="text" class="form-control" id="tel" placeholder="Telefone com DDD" name="empresa_telefone" required>
+                    <input type="text" class="form-control" id="tel" placeholder="Telefone com DDD" name="empresa_telefone" maxlength="11" required>
                 </div>
             </div>
 
@@ -30,4 +35,12 @@
             </div>
         </form>
     </div>
+    <script>
+        $('#cnpj').keyup(function () {
+            this.value = this.value.replace(/[^0-9]/g,'');
+        });
+        $('#tel').keyup(function () {
+            this.value = this.value.replace(/[^0-9]/g,'');
+        });
+    </script>
 <?php include '../rodape_interno.php'; ?>
