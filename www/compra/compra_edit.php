@@ -2,64 +2,50 @@
     include '../cabecalho_interno.php';
     include '../bd_control/conecta.php';
     include '../bd_control/control.php';
-    include 'pedido_control.php';
+    include 'compra_control.php';
 
     $ID = $_POST['edit'];
-    $metodos = lista_tabela_simples($conexao, 'METODO');
-    $pedido = seleciona_tupla_pedido($conexao, $ID);
-    $jogos = seleciona_jogos_pedido($conexao, $ID);
+    $compra = seleciona_tupla_compra($conexao, $ID);
+    $jogos = seleciona_jogos_compra($conexao, $ID);
 ?>
-<script src="../jogo_pedido.js"></script>
+<script src="../jogo_compra.js"></script>
 <div class="container">
     <br>
     <div class="row">
         <div class="col-md-4">
-            <h3>Pedido - Editar</h3>
+            <h3>Compra - Editar</h3>
         </div>
         <div class="col-md-8 text-right">
                 <div class="col-md-9 text-right">
-                    <p><strong>ID do Pedido</strong></p>
-                    <p><?=$pedido['ID']?></p>
+                    <p><strong>ID da Compra</strong></p>
+                    <p><?=$compra['ID']?></p>
                 </div>
-                <p><strong>Data do pedido</strong></p>
-                <p><?=date('d/m/Y', strtotime($pedido['data']))?></p>
+                <p><strong>Data do compra</strong></p>
+                <p><?=date('d/m/Y', strtotime($compra['data']))?></p>
         </div>
 
     </div>
     <hr />
     <form action="edit.php" method="post">
-        <input type="hidden" class="form-control" id="ID" name="ID" value="<?=$pedido['ID']?>" required>
+        <input type="hidden" class="form-control" id="ID" name="ID" value="<?=$compra['ID']?>" required>
         <div class="row">
             <div class="form-group col-md-4">
-                <p><strong>Cliente</strong></p>
-                <p><?=$pedido['user']?> - <?=$pedido['CLIENTE_PESSOA_CPF']?></p>
+                <p><strong>Supervisor</strong></p>
+                <p><?=$compra['user']?> - <?=$compra['FUNCIONARIO_PESSOA_CPF']?></p>
             </div>
             <div class="form-group col-md-4">
-                <label for="frete">Frete</label>
-                <input type="number" step="any" class="form-control" id="frete"
-                placeholder="Informe o Frete" min="0" onchange="calculaTotal();" name="frete"
-                value="<?=$pedido['frete']?>"
-                >
-            </div>
-            <div class="form-group col-md-4">
-                <label for="met_pag">Método de Pagamento</label>
-                <select class="form-control" id="met_pag" name="met_pag" required>
-                    <option value="">Escolha uma método</option>
-                    <?php
-                    foreach ($metodos as $metodo):
-                    ?>
-                        <option value="<?=$metodo['ID']?>"><?=$metodo['nome']?></option>
-                    <?php
-                    endforeach;
-                    ?>
-                </select>
+                <p><strong>Empresa</strong></p>
+                <p><?=$compra['nome']?></p>
             </div>
         </div>
         <br><br>
         <input type="hidden" class="form-control" id="jogos" name="jogos" required>
+        <input type="hidden" class="form-control" id="empresa_selecionada" name="empresa" value="<?=$compra['EMPRESA_CNPJ']?>" required>
         <input type="hidden" class="form-control" id="jogos_antigo" name="jogos_antigo" required>
+        <input type="hidden" class="form-control" id="preco_jogos" name="preco_jogos" required>
         <input type="hidden" class="form-control" id="qnt_jogos" name="qnt_jogos" required>
-        <input type="hidden" class="form-control" id="valor_total" name="valor_total" value="<?=$pedido['valor_total']?>" required>
+        <input type="hidden" class="form-control" id="valor_total" name="valor_total" value="<?=$compra['valor_total']?>" required>
+        <input type="hidden" class="form-control" id="frete" name="frete" value="0" required>
         <div class="row">
             <div class="col-md-12">
                 <label for="jogo">Jogos</label>
@@ -81,7 +67,9 @@
                                         <input type="hidden" id="cod" name="cod_jogo">
                                     </td>
                                     <td id="titulo">   ----------   </td>
-                                    <td id="preco">  -----  </td>
+                                    <td>
+                                        <input type="number" class="form-control" id="preco" min="0" placeholder="Informe o preco" disabled>
+                                    </td>
                                     <td>
                                         <input type="number" class="form-control" id="quantidade" min="0" placeholder="Informe a Quantidade" disabled>
                                     </td>
@@ -135,14 +123,13 @@
         <div class="row">
             <div class="col-md-12">
                 <button type="submit" onclick="return valida();" class="btn btn-primary">Salvar</button>
-                <a href="../pedido.php" class="btn btn-default">Cancelar</a>
+                <a href="../compra.php" class="btn btn-default">Cancelar</a>
             </div>
         </div>
     </form>
 </div>
 <?php include 'jogo_pedido.php'; ?>
 <script>
-    $("#met_pag").val(<?=$pedido['metodo_pagamento']?>);
     calculaTotal();
     listaJogos();
     $("#jogos_antigo").val(listaJogos());

@@ -1,53 +1,51 @@
 <?php
     include '../cabecalho_interno.php';
+    include '../cabecalho_interno.php';
+    include '../bd_control/conecta.php';
+    include 'supervisor_control.php';
+
+    $ID = $_POST['edit'];
+    $supervisor = seleciona_tupla_supervisor($conexao, $ID);
 ?>
     <div class="container">
         <div class="row">
             <h3>Supervisor - Editar</h3>
         </div>
         <hr />
-        <formaction="#" method="post">
-            <div class="row">
-                <div class="form-group col-md-3 text-right">
-                    <input type="radio" value="add_yes" id="add_funcionario" name="usar_funcionario" onclick="checaUsofuncionario();" >
-                    <label for="add_funcionario">Novo Funcionario</label>
-                </div>
-                <div class="form-group col-md-3 text-left">
-                    <select class="form-control" id="pessoa_selecionada" onchange="getfuncionario();" name="pessoa_selecionada" disabled>
-                        <option value="0">Escolha uma pessoa</option>
-                        <option value="12345678912">12345678912</option>
-                        <option value="15975315975">15975315975</option>
-                        <option value="23645789875">23645789875</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-3 text-right">
-                    <input type="radio" value="add_no" id="no_funcionario" name="usar_funcionario" onclick="checaUsofuncionario();" checked>
-                    <label for="no_funcionario">Funcionario Existente</label>
-                </div>
-                <div class="form-group col-md-3 text-left">
-                    <select class="form-control" id="funcionario_selecionado" onchange="getfuncionario();" name="funcionario_selecionado" disabled>
-                        <option value="0">Escolha um Funcionário</option>
-                        <option value="12345678912">12345678912</option>
-                        <option value="15975315975">15975315975</option>
-                    </select>
-                </div>
-            </div>
+        <form action="edit.php" method="post">
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="cadastro">Cadastro</label>
-                    <input type="number" class="form-control pessoa" id="cadastro" placeholder="Cadastro" name="funcionario_cad">
+                    <label for="funcionario_selecionado">Funcionário</label>
+                    <input type="text" class="form-control funcionario" id="funcionario_selecionado"
+                        placeholder="Cadastro do Funcionário" name="funcionario_selecionado"
+                        value="<?=$supervisor['cracha']?>" required
+                    >
+                    <input type="hidden" name="cpf" id="cpf" value="<?=$supervisor['FUNCIONARIO_PESSOA_CPF']?>" required>
                 </div>
             </div>
             <hr />
-
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="usuario">Usuário</label>
-                    <input type="text" class="form-control funcionario" id="usuario" placeholder="Usuário" name="supervisor_user" required>
+                    <input type="text" class="form-control funcionario" id="usuario"
+                        placeholder="Usuário" name="supervisor_user"
+                        value="<?=$supervisor['user']?>" required
+                    >
+                    <input type="hidden" name="id_user" id="id_user" value="<?=$supervisor['usuario']?>" required>
                 </div>
+            </div>
+            <div class="row">
                 <div class="form-group col-md-4">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control funcionario" id="senha" placeholder="Senha" name="supervisor_password" required>
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" name="cliente_password" required disabled>
+                    <input type="hidden" class="form-control" id="senhaCrip" name="senhaCrip" value="<?=$supervisor['senha']?>">
+                </div>
+                <div class="form-group col-md-4">
+                    <br><br>
+                    <input type="radio" value="1" id="change_senha" name="troca_senha" onclick="$('#senha').prop('disabled', false);">
+                    <label for="change_senha">Trocar Senha</label>
+                    <input type="radio" value="0" id="no_senha" name="troca_senha" onclick="$('#senha').prop('disabled', true); $('#senha').val('');" checked>
+                    <label for="no_senha">Manter Senha</label>
                 </div>
             </div>
             <hr />
@@ -57,15 +55,19 @@
                     <button type="submit" class="btn btn-primary">Salvar</button>
                     <a href="../supervisor.php" class="btn btn-default">Cancelar</a>
                 </div>
-                <div class="col-md-4 text-right">
-                    <a href="#" data-toggle="modal" data-target="#delete-confirm" class="btn btn-danger">Deletar</a>
-                </div>
             </div>
         </form>
     </div>
-    <script src="../usar_funcionario.js"></script>
     <script>
-        $(document).ready = checaUsofuncionario();
+        $("#funcionario_selecionado").keypress( function(event){
+            $( "#funcionario_selecionado" ).autocomplete({
+                source: '../busca.php?campo=cracha&table=FUNCIONARIO',
+            });
+        });
+        $( "#funcionario_selecionado" ).on( "autocompleteselect", function( event, ui ) {
+            var buscar = ui.item.value;
+            $("#funcionario_selecionado").val(buscar);
+        });
     </script>
 
     <?php

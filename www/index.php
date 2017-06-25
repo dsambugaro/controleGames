@@ -19,10 +19,11 @@
                         <li><a href="metodo.php">Métodos de Pagamento</a></li>
                     </ul>
                 </li>
+                <li><a class="btn btn-primary" href="compra.php">Compras</a></li>
                 <li><a class="btn btn-primary" href="funcionario.php">Funcionarios</a></li>
                 <li><a class="btn btn-primary" href="supervisor.php">Supervisores</a></li>
                 <li class="dropdown">
-                    <a class="btn btn-primary" href="jogos.php" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Jogos <span class="caret"></span></a>
+                    <a class="btn btn-primary" href="jogo.php" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false">Jogos <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="plataforma.php">Plataformas</a></li>
                         <li><a href="genero.php">Gêneros</a></li>
@@ -35,6 +36,7 @@
                         <li><a href="usuario.php">Usuários</a></li>
                         <li><a href="estado.php">Estados</a></li>
                         <li><a href="cidade.php">Cidades</a></li>
+                        <li><a href="relatorio.php">Relatórios</a></li>
                     </ul>
                 </li>
             </ul>

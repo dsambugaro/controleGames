@@ -3,6 +3,7 @@
     include 'bd_control/conecta.php';
     include 'bd_control/control.php';
     include 'empresa/empresa_control.php';
+
     $rows = lista_tabela_simples($conexao, $table);
 ?>
     <div class="container">
@@ -12,18 +13,24 @@
             </div>
             <div class="col-md-6">
                 <div class="input-group h2">
-                    <input name="busca" class="form-control" id="buscaEmpresas" type="text" placeholder="Pesquisar Empresas">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                    </span>
+                    <input name="busca" class="form-control" id="busca" type="text" placeholder="Pesquisar Empresas">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                 </div>
             </div>
-
             <div class="col-md-3">
                 <a href="empresa/empresa_add.php" class="btn btn-primary pull-right h2">Nova Empresa</a>
             </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6 text-right">
+                <input type="radio" id="busca_nome" name="campo" value="nome" checked>
+                <label for="busca_nome">Nome</label>
+            </div>
+            <div class="form-group col-md-6 text-left">
+                    <input type="radio" id="busca_cnpj" name="campo" value="CNPJ">
+                    <label for="busca_cnpj">CNPJ</label>
+            </div>
+            <input type="hidden" name="campo_busca" value="nome" id="campo_busca">
         </div>
         <hr />
         <?php
@@ -40,7 +47,7 @@
                             <th class="text-center">Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="itens">
                         <?php
                             foreach ($rows as $row):
                         ?>
@@ -64,5 +71,6 @@
 
 <?php
     include "modal_excluir.php";
+    include "busca_com_filtro.php";
     include "rodape.php";
 ?>

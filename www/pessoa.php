@@ -18,7 +18,6 @@
                     <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
                 </div>
             </div>
-
             <div class="col-md-3">
                 <a href="pessoa/pessoa_add.php" class="btn btn-primary pull-right h2">Nova Pessoa</a>
             </div>
@@ -32,7 +31,6 @@
                     <input type="radio" id="busca_cpf" name="campo" value="CPF">
                     <label for="busca_cpf">CPF</label>
             </div>
-            <input type="hidden" name="campo_busca" value="nome" id="campo_busca">
         </div>
         <hr />
         <?php
@@ -67,7 +65,6 @@
                         ?>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>

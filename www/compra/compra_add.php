@@ -2,13 +2,12 @@
     include '../cabecalho_interno.php';
     include '../bd_control/conecta.php';
     include '../bd_control/control.php';
-    include 'pedido_control.php';
-
-    $metodos = lista_tabela_simples($conexao, 'METODO');
+    include 'compra_control.php';
+    $empresas = lista_tabela_simples($conexao, 'EMPRESA');
 ?>
     <div class="container">
         <div class="row">
-            <h3>Pedido - Adicionar</h3>
+            <h3>Compra - Adicionar</h3>
         </div>
         <hr />
         <?php
@@ -17,26 +16,19 @@
         <form action="add.php" method="post">
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="cliente">Cliente</label>
-                    <input type="text" class="form-control" id="cliente"
-                        placeholder="Informe o Cliente" name="cliente"  required
+                    <label for="supervisor">Supervisor</label>
+                    <input type="text" class="form-control" id="supervisor"
+                        placeholder="Informe o Supervisor" name="supervisor"  required
                     >
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="frete">Frete</label>
-                    <input type="number" step="any" class="form-control" id="frete"
-                        placeholder="Informe o Frete" min="0" onchange="calculaTotal();" name="frete"
-                        value="0"
-                    >
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="met_pag">Método de Pagamento</label>
-                    <select class="form-control" id="met_pag" name="met_pag" required>
-                        <option value="">Escolha uma método</option>
+                    <label for="empresa_selecionada">Empresa</label>
+                    <select class="form-control" id="empresa_selecionada" name="empresa" onchange="limpaJogos();" required>
+                        <option value="">Escolha uma Empresa</option>
                         <?php
-                            foreach ($metodos as $metodo):
+                            foreach ($empresas as $empresa):
                         ?>
-                                <option value="<?=$metodo['ID']?>"><?=$metodo['nome']?></option>
+                                <option value="<?=$empresa['CNPJ']?>"><?=$empresa['nome']?></option>
                         <?php
                             endforeach;
                         ?>
@@ -47,6 +39,8 @@
             <input type="hidden" class="form-control" id="jogos" name="jogos" required>
             <input type="hidden" class="form-control" id="qnt_jogos" name="qnt_jogos" required>
             <input type="hidden" class="form-control" id="valor_total" name="valor_total" required>
+            <input type="hidden" class="form-control" id="preco_jogos" name="preco_jogos" required>
+            <input type="hidden" class="form-control" id="frete" name="frete" value="0" required>
             <div class="row">
                 <div class="col-md-12">
                     <label for="jogo">Jogos</label>
@@ -68,7 +62,9 @@
                                             <input type="hidden" id="cod" name="cod_jogo">
                                         </td>
                                         <td id="titulo">   ----------   </td>
-                                        <td id="preco">  -----  </td>
+                                        <td>
+                                            <input type="number" class="form-control" id="preco" min="0" placeholder="Informe o preco" disabled>
+                                        </td>
                                         <td>
                                             <input type="number" class="form-control" id="quantidade" min="0" placeholder="Informe a Quantidade" disabled>
                                         </td>
@@ -91,27 +87,35 @@
             <br><br><br>
             <div class="row text-right">
                 <p><strong>Total</strong></p>
-                <p id="total"> --- </p>
+                <p id="total">R$ 0.00 </p>
             </div>
             <hr />
             <div class="row">
                 <div class="col-md-12">
                     <button type="submit" onclick="return valida();" class="btn btn-primary">Adicionar</button>
-                    <a href="../pedido.php" class="btn btn-default">Cancelar</a>
+                    <a href="../compra.php" class="btn btn-default">Cancelar</a>
                 </div>
             </div>
         </form>
     </div>
     <script>
-        $("#cliente").keypress( function(event){
-            $( "#cliente" ).autocomplete({
-                source: '../busca.php?campo=PESSOA_CPF&table=CLIENTE',
+        $("#supervisor").keypress( function(event){
+            $( "#supervisor" ).autocomplete({
+                source: '../busca.php?campo=FUNCIONARIO_PESSOA_CPF&table=SUPERVISOR',
+                select: function(event, ui){
+                    var buscar = ui.item.value;
+                    $("#supervisor").val(buscar);
+                }
             });
         });
-        $( "#cliente" ).on( "autocompleteselect", function( event, ui ) {
-            var buscar = ui.item.value;
-            $("#cliente").val(buscar);
-        });
+
+        function limpaJogos(){
+            var lista = document.getElementById("listaJogos");
+            var total = document.getElementById("total");
+            lista.innerHTML = "";
+            calculaTotal();
+            listaJogos();
+        }
     </script>
     <?php
         include 'jogo_pedido.php';
