@@ -47,6 +47,7 @@
             <input type="hidden" class="form-control" id="jogos" name="jogos" required>
             <input type="hidden" class="form-control" id="qnt_jogos" name="qnt_jogos" required>
             <input type="hidden" class="form-control" id="valor_total" name="valor_total" required>
+            <input type="hidden" class="form-control" id="estoque" required>
             <div class="row">
                 <div class="col-md-12">
                     <label for="jogo">Jogos</label>

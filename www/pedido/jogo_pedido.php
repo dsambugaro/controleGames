@@ -35,19 +35,36 @@
                 var titulo = document.getElementById("titulo");
                 var preco = document.getElementById("preco");
                 var codigo = document.getElementById("cod");
+                var estoque = document.getElementById("estoque");
                 titulo.innerHTML = retorno[0].titulo;
                 preco.innerHTML = retorno[0].preco;
                 codigo.value = retorno[0].codigo;
+                estoque.value = retorno[0].qtd_estoque;
                 console.log(retorno[0]);
             }
         });
     }
+
+    function validaQuant(quantidade){
+        var estoque = document.getElementById("estoque").value;
+        if (quantidade > estoque) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     $("#quantidade").keyup( function(event){
         var qnt = $(this).val();
-        var preco = document.getElementById("preco").innerHTML;
-        var add = document.getElementById("addJogo");
-        var total_unidade = document.getElementById("total_unidade");
-        total_unidade.innerHTML = ((parseFloat(preco)) * (parseFloat(qnt))).toFixed(2);
+        if (validaQuant(qnt)) {
+            var preco = document.getElementById("preco").innerHTML;
+            var add = document.getElementById("addJogo");
+            var total_unidade = document.getElementById("total_unidade");
+            total_unidade.innerHTML = ((parseFloat(preco)) * (parseFloat(qnt))).toFixed(2);
+        } else {
+            alert('Quantidade em estoque é menor que a quantidade digitada!');
+            qnt = $(this).val('');
+        }
         if (qnt == '') {
             add.setAttribute('disabled', true);
         } else {
@@ -117,13 +134,13 @@
             data: 'acao=2&quantidade='+qnt+'&filtro='+codigo,
             dataType: 'html',
             success: function(retorno){
-                var teste = document.getElementById("listaJogos");
+                var lista = document.getElementById("listaJogos");
                 var codigo = document.getElementById("codigo");
-                var tess = document.getElementById("jogos").value;
-                if (tess.indexOf(codigo.value) >= 0) {
+                var jogos_adicionados = document.getElementById("jogos").value;
+                if (jogos_adicionados.indexOf(codigo.value) >= 0) {
                     alert('Jogo já adicionado!');
                 } else {
-                    teste.innerHTML += retorno;
+                    lista.innerHTML += retorno;
                     console.log(retorno);
                 }
                 var qnt = document.getElementById("quantidade");

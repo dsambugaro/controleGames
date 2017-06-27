@@ -14,6 +14,10 @@
         var preco = document.getElementById("preco");
         var add = document.getElementById("addJogo");
 
+        if ($(this).val() != $("#cod").val()) {
+            $(this).val("");
+            titulo.innerHTML = "   ----------   ";
+        }
         if ($(this).val() == "") {
             preco.setAttribute('disabled', true);
             qnt.setAttribute('disabled', true);

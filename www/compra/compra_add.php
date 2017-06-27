@@ -112,7 +112,17 @@
         function limpaJogos(){
             var lista = document.getElementById("listaJogos");
             var total = document.getElementById("total");
+            var qnt = document.getElementById("quantidade");
+            var preco = document.getElementById("preco");
+            var codigo = document.getElementById("codigo");
             lista.innerHTML = "";
+            titulo.innerHTML = "   ----------   ";
+            total_unidade.innerHTML = "  -----  ";
+            qnt.value = "";
+            preco.value = "";
+            codigo.value = "";
+            preco.setAttribute('disabled', true);
+            qnt.setAttribute('disabled', true);
             calculaTotal();
             listaJogos();
         }

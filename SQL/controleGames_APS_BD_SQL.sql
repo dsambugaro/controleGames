@@ -324,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `controleGames_APS_BD`.`PEDIDO` (
   PRIMARY KEY (`ID`),
   CONSTRAINT `fk_PEDIDO_CLIENTE1`
     FOREIGN KEY (`CLIENTE_PESSOA_CPF`)
-    REFERENCES `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`),
+    REFERENCES `controleGames_APS_BD`.`CLIENTE` (`PESSOA_CPF`) ON UPDATE CASCADE ON DELETE CASCADE,
   CONSTRAINT `fk_PEDIDO_METODO`
     FOREIGN KEY (`metodo_pagamento`)
     REFERENCES `controleGames_APS_BD`.`METODO` (`ID`));
@@ -361,6 +361,13 @@ CREATE TRIGGER USER_REMOVE_SUPERVISOR AFTER DELETE
 ON SUPERVISOR FOR EACH ROW
 BEGIN
 	DELETE FROM USUARIO WHERE ID = OLD.usuario;
+END//
+
+CREATE TRIGGER ATUALIZA_ESTOQUE AFTER INSERT
+ON PEDIDO_CONTEM FOR EACH ROW
+BEGIN
+	UPDATE JOGO SET qtd_estoque = (qtd_estoque - NEW.quantidade)
+    WHERE codigo = NEW.JOGO_codigo;
 END//
 
 DELIMITER ;
@@ -530,10 +537,10 @@ INSERT INTO `controleGames_APS_BD`.`GENERO` (`nome`) VALUES ('Aventura');
 -- -----------------------------------------------------
 -- Data for table `controleGames_APS_BD`.`JOGO`
 -- -----------------------------------------------------
-INSERT INTO `controleGames_APS_BD`.`JOGO` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lancamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (4589, 'Super Mario', 1, 1, 'Super Mario Bros. é um jogo eletrônico lançado pela Nintendo em 1985. Considerado um clássico, Super Mario Bros. foi um dos primeiros JOGO de plataforma com rolagem lateral, recurso conhecido em inglês como side-scrolling', '2006-12-25', 0, 60.0, 0, '47462545000183');
+INSERT INTO `controleGames_APS_BD`.`JOGO` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lancamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (4589, 'Super Mario', 1, 1, 'Super Mario Bros. é um jogo eletrônico lançado pela Nintendo em 1985. Considerado um clássico, Super Mario Bros. foi um dos primeiros JOGO de plataforma com rolagem lateral, recurso conhecido em inglês como side-scrolling', '2006-12-25', 0, 60.0, 5, '47462545000183');
 INSERT INTO `controleGames_APS_BD`.`JOGO` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lancamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (7894, 'Call of Duty: Infite Warface', 2, 2, 'Call of Duty (frequentemente abreviado como CoD) é uma série de videoJOGO na primeira pessoa. A série começou no PC, mais tarde expandindo-se para os vários tipos de consolas. Também foram lançados vários JOGO spin-off. ', '2003-11-04', 16, 95.9, 5, '93111580000175');
-INSERT INTO `controleGames_APS_BD`.`JOGO` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lancamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1549, 'Need For Speed', 3, 3, 'Need for Speed é um jogo eletrônico de corrida que foi produzido pelo estúdio Ghost Games e lançado pela Electronic Arts para as plataformas PlayStation 4, Xbox One e para Microsoft Windows. O game, que possui uma jogabilidade não linear dá ao jogador a liberdade de explorar totalmente os cenários, é o vigésimo primeiro da franquia Need for Speed, sendo, porém, um reboot a esta popular série.', '2015-11-03', 12, 90.0, 2, '62313357000187');
-INSERT INTO `controleGames_APS_BD`.`JOGO` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lancamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1548, 'Far Cry Primal', 4, 3, 'Far Cry Primal é um videojogo de ação-aventura na primeira pessoa desenvolvido pela Ubisoft Montreal com a assistência de Ubisoft Toronto, Ubisoft Kiev e Ubisoft Shanghai e publicado pela Ubisoft.', '2016-03-01', 18, 165.0, 1, '38644428000140');
+INSERT INTO `controleGames_APS_BD`.`JOGO` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lancamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1549, 'Need For Speed', 3, 3, 'Need for Speed é um jogo eletrônico de corrida que foi produzido pelo estúdio Ghost Games e lançado pela Electronic Arts para as plataformas PlayStation 4, Xbox One e para Microsoft Windows. O game, que possui uma jogabilidade não linear dá ao jogador a liberdade de explorar totalmente os cenários, é o vigésimo primeiro da franquia Need for Speed, sendo, porém, um reboot a esta popular série.', '2015-11-03', 12, 90.0, 5, '62313357000187');
+INSERT INTO `controleGames_APS_BD`.`JOGO` (`codigo`, `titulo`, `genero`, `plataforma`, `sinopse`, `lancamento`, `faixa_etaria`, `preco`, `qtd_estoque`, `EMPRESA_CNPJ`) VALUES (1548, 'Far Cry Primal', 4, 3, 'Far Cry Primal é um videojogo de ação-aventura na primeira pessoa desenvolvido pela Ubisoft Montreal com a assistência de Ubisoft Toronto, Ubisoft Kiev e Ubisoft Shanghai e publicado pela Ubisoft.', '2016-03-01', 18, 165.0, 5, '38644428000140');
 
 
 

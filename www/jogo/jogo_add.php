@@ -2,6 +2,7 @@
     include '../cabecalho_interno.php';
     include '../bd_control/conecta.php';
     include '../bd_control/control.php';
+    include 'jogo_control.php';
 
     $plataformas = lista_tabela_simples($conexao, 'PLATAFORMA');
     $generos = lista_tabela_simples($conexao, 'GENERO');
