@@ -39,7 +39,7 @@
         ?>
         <br>
         <div id="list" class="row text-center">
-            <div class=" table-responsivecol-md-12">
+            <div class=" table-responsive col-md-12">
                 <table class="table table-hover">
                     <thead>
                         <tr>

@@ -25,8 +25,8 @@
                 <option value="10">Estados com o maior número de pedidos entre:</option>
             </select>
         </div>
-        <hr / >
         <div class="row" id="variaveis">
+            <br><br>
             <div id="data_intervalo" class="text-center hide">
                 <p><strong>Intervalo de data:</strong></p>
                 <ul class="list-inline">
@@ -88,6 +88,8 @@
                 </ul>
             </div>
         </div>
+        <hr/>
+        <br>
         <div class="row">
             <div id="list" class="row text-center">
                 <div id="resultados">

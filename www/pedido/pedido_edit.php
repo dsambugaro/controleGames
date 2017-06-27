@@ -116,7 +116,7 @@
                                         echo "{$preco_total}";
                                         echo "</td>";
                                         echo "<td>";
-                                        echo "<button type=\"button\" class=\"btn btn-sm btn-danger\" onclick=\"$(this).closest('tr').remove(); calculaTotal(); listaJogos();\" value=\"X\"><span class=\"glyphicon glyphicon-remove\"></span></button>";
+                                        echo "<button type=\"button\" class=\"btn btn-sm btn-danger\" onclick=\"atualizaEstoque({$row['JOGO_codigo']}, {$row['quantidade']});  $(this).closest('tr').remove(); calculaTotal(); listaJogos();\" ><span class=\"glyphicon glyphicon-remove\"></span></button>";
                                         echo "</td>";
                                         echo "</tr>";
                                     endforeach;
@@ -136,18 +136,52 @@
         <div class="row">
             <div class="col-md-12">
                 <button type="submit" onclick="return valida();" class="btn btn-primary">Salvar</button>
-                <a href="../pedido.php" class="btn btn-default">Cancelar</a>
+                <a href="../pedido.php" class="btn btn-default" onclick="cancelaAtualizaEstoque();">Cancelar</a>
             </div>
         </div>
     </form>
 </div>
 <?php include 'jogo_pedido.php'; ?>
 <script>
+    var controle_1 = '';
+    var controle_2 = '';
+    var controle_final_1 = '{';
     $("#met_pag").val(<?=$pedido['metodo_pagamento']?>);
     calculaTotal();
     listaJogos();
     $("#jogos_antigo").val(listaJogos());
     console.log($("#jogos_antigo").val());
+
+    function atualizaEstoque(cod, quantidade){
+        controle_1 += '"'+cod+'":'+quantidade+',';
+        controle_1 = controle_1.substr(0,(controle_1.length - 1));
+        controle_2 += cod+',';
+        controle_2 = controle_2.substr(0,(controle_2.length - 1));
+        console.log('controle_2:');
+        console.log(controle_2);
+        $.ajax({
+            method: "post",
+            url: 'atualizaEstoque.php',
+            data: 'acao=1&codigo='+cod+'&quantidade='+quantidade,
+            dataType: 'html',
+            success: function(retorno){
+                console.log(retorno);
+            }
+        });
+    }
+    function cancelaAtualizaEstoque(){
+        controle_final_1 += controle_1;
+        controle_final_1 += '}';
+        $.ajax({
+            method: "post",
+            url: 'atualizaEstoque.php',
+            data: 'acao=2&codigo='+controle_2+'&quantidade='+controle_final_1,
+            dataType: 'html',
+            success: function(retorno){
+                console.log(retorno);
+            }
+        });
+    }
 </script>
 <?php
     include '../rodape_interno.php';

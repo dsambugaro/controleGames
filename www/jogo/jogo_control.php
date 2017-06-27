@@ -25,12 +25,12 @@
     }
 
     function insert_jogo($conexao, $codigo, $titulo, $genero, $plataforma, $sinopse, $lancamento, $fxa_etaria, $preco, $quantidade, $empresa){
-        $insert = "INSERT INTO JOGO VALUES ('{$codigo}', '{$titulo}', {$genero}, {$plataforma}, '{$sinopse}', '{$lancamento}', $fxa_etaria, $preco, $quantidade, $empresa)";
+        $insert = "INSERT INTO JOGO VALUES ('{$codigo}', '{$titulo}', {$genero}, {$plataforma}, '{$sinopse}', '{$lancamento}', {$fxa_etaria}, {$preco}, {$quantidade}, {$empresa})";
         return mysqli_query($conexao, $insert);
     }
 
     function alter_jogo($conexao, $codigo, $titulo, $genero, $plataforma, $sinopse, $lancamento, $fxa_etaria, $preco, $quantidade, $empresa, $cod_antigo){
-        $alter = "UPDATE JOGO SET codigo = '{$codigo}', titulo = '{$titulo}', genero = {$genero}, plataforma = {$plataforma}, sinopse = '{$sinopse}', lancamento = '{$lancamento}', faixa_etaria = $fxa_etaria, preco = $preco, qtd_estoque = $quantidade, EMPRESA_CNPJ = $empresa
+        $alter = "UPDATE JOGO SET codigo = '{$codigo}', titulo = '{$titulo}', genero = {$genero}, plataforma = {$plataforma}, sinopse = '{$sinopse}', lancamento = '{$lancamento}', faixa_etaria = {$fxa_etaria}, preco = {$preco}, qtd_estoque = {$quantidade}, EMPRESA_CNPJ = {$empresa}
                     WHERE codigo = '{$cod_antigo}'";
         return mysqli_query($conexao, $alter);
     }

@@ -85,3 +85,61 @@
         $delete = "DELETE FROM PEDIDO WHERE ID = {$ID}";
         return mysqli_query($conexao, $delete);
     }
+
+    function atualizaEstoque($conexao, $codigo, $quantidade){
+        $pega_quantidade = "SELECT J.qtd_estoque FROM JOGO J WHERE codigo = '{$codigo}'";
+        $query = mysqli_query($conexao, $pega_quantidade);
+        $quantidade_atual = mysqli_fetch_assoc($query);
+        $quantidade_nova = $quantidade + $quantidade_atual['qtd_estoque'];
+        $alter = "UPDATE JOGO SET qtd_estoque = {$quantidade_nova} WHERE codigo = '{$codigo}'";
+        return mysqli_query($conexao, $alter);
+    }
+
+    function atualizaEstoque2($conexao, $codigo, $quantidade){
+        $pega_quantidade = "SELECT J.qtd_estoque FROM JOGO J WHERE codigo = '{$codigo}'";
+        $query = mysqli_query($conexao, $pega_quantidade);
+        $quantidade_atual = mysqli_fetch_assoc($query);
+        $quantidade_nova = $quantidade_atual['qtd_estoque'] - $quantidade;
+        echo $quantidade_atual['qtd_estoque'];
+        echo "<br>";
+        echo $quantidade;
+        $alter = "UPDATE JOGO SET qtd_estoque = {$quantidade_nova} WHERE codigo = '{$codigo}'";
+        return mysqli_query($conexao, $alter);
+    }
+
+    function busca_auto_completa_pedido($conexao, $campo, $buscar){
+        $busca = "SELECT P.ID, P.data, P.valor_total, U.user
+                    FROM PEDIDO P
+                    JOIN CLIENTE C ON C.PESSOA_CPF = P.CLIENTE_PESSOA_CPF
+                    JOIN USUARIO U ON U.ID = C.usuario
+                    WHERE {$campo} LIKE '%{$buscar}%'
+                    ORDER BY {$campo}";
+        $resultado = mysqli_query($conexao, $busca);
+        $virgula = false;
+        $retorna = '[';
+        while ($res = mysqli_fetch_assoc($resultado)) {
+            if ($virgula) {
+                $retorna .= ', ';
+            } else {
+                $virgula = true;
+            }
+            $retorna .= json_encode($res["{$campo}"]);
+        }
+        $retorna .= ']';
+        return $retorna;
+    }
+
+    function busca_pedido($conexao, $campo, $buscar){
+        $resultados = array();
+        $busca = "SELECT P.ID, P.data, P.valor_total, U.user
+                    FROM PEDIDO P
+                    JOIN CLIENTE C ON C.PESSOA_CPF = P.CLIENTE_PESSOA_CPF
+                    JOIN USUARIO U ON U.ID = C.usuario
+                    WHERE {$campo} LIKE '%{$buscar}%'
+                    ORDER BY {$campo}";
+        $resultado = mysqli_query($conexao, $busca);
+        while ($res = mysqli_fetch_assoc($resultado)) {
+            array_push($resultados, $res);
+        }
+        return $resultados;
+    }

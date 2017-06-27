@@ -6,7 +6,7 @@
     $tratamento = a;
 
     function insert_pessoa($conexao, $cpf, $nome_pessoa, $nasc){
-        $insert_pessoa = "INSERT INTO PESSOA(`CPF`,`nome_pessoa`, `data_nasc_pessoa`) VALUES('{$cpf}','{$nome_pessoa}', '{$nasc}');";
+        $insert_pessoa = "INSERT INTO PESSOA(`CPF`,`nome_pessoa`, `data_nasc_pessoa`) VALUES('{$cpf}','{$nome_pessoa}', CAST('{$nasc}' AS DATE));";
         return mysqli_query($conexao, $insert_pessoa);
     }
 
@@ -16,7 +16,7 @@
     }
 
     function alter_pessoa($conexao, $cpf, $nome_pessoa, $nasc, $id){
-        $alter = "UPDATE PESSOA SET nome_pessoa = '{$nome_pessoa}', data_nasc_pessoa = '{$nasc}', CPF = {$cpf} WHERE CPF = {$id}";
+        $alter = "UPDATE PESSOA SET nome_pessoa = '{$nome_pessoa}', data_nasc_pessoa = CAST('{$nasc}' AS DATE), CPF = {$cpf} WHERE CPF = {$id}";
         return mysqli_query($conexao, $alter);
     }
 

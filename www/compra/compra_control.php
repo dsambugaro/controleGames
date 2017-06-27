@@ -89,3 +89,43 @@
         $delete = "DELETE FROM COMPRA WHERE ID = {$ID}";
         return mysqli_query($conexao, $delete);
     }
+
+    function busca_auto_completa_compra($conexao, $campo, $buscar){
+        $busca = "SELECT C.ID, C.data, C.preco_total, U.user, E.nome
+                    FROM COMPRA C
+                    JOIN SUPERVISOR S ON S.FUNCIONARIO_PESSOA_CPF = C.SUPERVISOR_FUNCIONARIO_PESSOA_CPF
+                    JOIN USUARIO U ON U.ID = S.usuario
+                    JOIN EMPRESA E ON E.CNPJ = C.EMPRESA_CNPJ
+                    WHERE {$campo} LIKE '%{$buscar}%'
+                    GROUP BY {$campo}
+                    ORDER BY {$campo}";
+        $resultado = mysqli_query($conexao, $busca);
+        $virgula = false;
+        $retorna = '[';
+        while ($res = mysqli_fetch_assoc($resultado)) {
+            if ($virgula) {
+                $retorna .= ', ';
+            } else {
+                $virgula = true;
+            }
+            $retorna .= json_encode($res["{$campo}"]);
+        }
+        $retorna .= ']';
+        return $retorna;
+    }
+
+    function busca_compra($conexao, $campo, $buscar){
+        $resultados = array();
+        $busca = "SELECT C.ID, C.data, C.preco_total, U.user, E.nome
+                    FROM COMPRA C
+                    JOIN SUPERVISOR S ON S.FUNCIONARIO_PESSOA_CPF = C.SUPERVISOR_FUNCIONARIO_PESSOA_CPF
+                    JOIN USUARIO U ON U.ID = S.usuario
+                    JOIN EMPRESA E ON E.CNPJ = C.EMPRESA_CNPJ
+                    WHERE {$campo} LIKE '%{$buscar}%'
+                    ORDER BY {$campo}";
+        $resultado = mysqli_query($conexao, $busca);
+        while ($res = mysqli_fetch_assoc($resultado)) {
+            array_push($resultados, $res);
+        }
+        return $resultados;
+    }

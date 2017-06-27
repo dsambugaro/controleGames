@@ -11,21 +11,6 @@
     $cidade = $_POST['cidade'];
     $estado = $_POST['estado'];
 
-    // echo "<thead id=\"cabecalho\">";
-    // echo "<tr>";
-    //     echo "<th class=\"text-center\"></th>";
-    //     echo "<th class=\"text-center\">Ações</th>";
-    // echo "</tr>";
-    // echo "</thead>";
-    // echo "<tbody id=\"itens\">";
-    // foreach ($rows as $row):
-    //     echo "<tr>";
-    //         echo "<td>{$row['']}</td>";
-    //                 include 'acoes.php';
-    //     echo "</tr>";
-    // endforeach;
-    // echo "</tbody>";
-
     switch ($relatorio) {
         case 1:
             $data1 = $_POST['data1'];
@@ -273,9 +258,9 @@
 
         case 7:
             $rows = relatorio_7($conexao);
-            $tableMin = jogo;
-            $key = codigo;
-            $referencia = titulo;
+            $tableMin = empresa;
+            $key = CNPJ;
+            $referencia = nome;
             if ($rows) {
                 echo "<div class=\"table-responsive col-md-12\">";
                 echo "<table class=\"table table-hover\">";
@@ -313,8 +298,39 @@
 
         case 8:
             $rows = relatorio_8($conexao);
+            $tableMin = empresa;
+            $key = CNPJ;
+            $referencia = nome;
             if ($rows) {
-                echo "";
+                echo "<div class=\"table-responsive col-md-12\">";
+                echo "<table class=\"table table-hover\">";
+                echo "<thead id=\"cabecalho\">";
+                echo "<tr>";
+                    echo "<th class=\"text-center\">CNPJ</th>";
+                    echo "<th class=\"text-center\">Nome</th>";
+                    echo "<th class=\"text-center\">Telefone</th>";
+                    echo "<th class=\"text-center\">Quantidade de Jogos Vendidos</th>";
+                    echo "<th class=\"text-center\">Ações</th>";
+                echo "</tr>";
+                echo "</thead>";
+                echo "<tbody id=\"itens\">";
+                foreach ($rows as $row):
+                    echo "<tr>";
+                        echo "<td>{$row['CNPJ']}</td>";
+                        echo "<td>{$row['nome']}</td>";
+                        echo "<td>{$row['telefone']}</td>";
+                        echo "<td>{$row['jogos_vendidos']}</td>";
+                                include '../acoes.php';
+                    echo "</tr>";
+                endforeach;
+                echo "</tbody>";
+                echo "</table>";
+                echo "</div>";
+                include 'excluir.php';
+            } elseif ($rows == NULL) {
+                echo "<p class=\"alert-danger text-center\">";
+                echo "Nenhum resultado!";
+                echo "</p>";
             } else {
                 include "relatorio_erro.php";
             }
@@ -324,8 +340,39 @@
             $data1 = $_POST['data1'];
             $data2 = $_POST['data2'];
             $rows = relatorio_9($conexao, $data1, $data2);
+            $tableMin = supervisor;
+            $key = FUNCIONARIO_PESSOA_CPF;
+            $referencia = user;
             if ($rows) {
-                echo "";
+                echo "<div class=\"table-responsive col-md-12\">";
+                echo "<table class=\"table table-hover\">";
+                echo "<thead id=\"cabecalho\">";
+                echo "<tr>";
+                    echo "<th class=\"text-center\">CPF</th>";
+                    echo "<th class=\"text-center\">Nome</th>";
+                    echo "<th class=\"text-center\">Usuário</th>";
+                    echo "<th class=\"text-center\">Cadastro</th>";
+                    echo "<th class=\"text-center\">Ações</th>";
+                echo "</tr>";
+                echo "</thead>";
+                echo "<tbody id=\"itens\">";
+                foreach ($rows as $row):
+                    echo "<tr>";
+                        echo "<td>{$row['FUNCIONARIO_PESSOA_CPF']}</td>";
+                        echo "<td>{$row['nome_pessoa']}</td>";
+                        echo "<td>{$row['user']}</td>";
+                        echo "<td>{$row['cracha']}</td>";
+                                include '../acoes.php';
+                    echo "</tr>";
+                endforeach;
+                echo "</tbody>";
+                echo "</table>";
+                echo "</div>";
+                include 'excluir.php';
+            } elseif ($rows == NULL) {
+                echo "<p class=\"alert-danger text-center\">";
+                echo "Nenhum resultado!";
+                echo "</p>";
             } else {
                 include "relatorio_erro.php";
             }
@@ -335,8 +382,35 @@
             $data1 = $_POST['data1'];
             $data2 = $_POST['data2'];
             $rows = relatorio_10($conexao, $data1, $data2);
+            $tableMin = estado;
+            $key = ID;
+            $referencia = nome;
             if ($rows) {
-                echo "";
+                echo "<div class=\"table-responsive col-md-12\">";
+                echo "<table class=\"table table-hover\">";
+                echo "<thead id=\"cabecalho\">";
+                echo "<tr>";
+                    echo "<th class=\"text-center\">Nome</th>";
+                    echo "<th class=\"text-center\">Quantidade de pedidos</th>";
+                    echo "<th class=\"text-center\">Ações</th>";
+                echo "</tr>";
+                echo "</thead>";
+                echo "<tbody id=\"itens\">";
+                foreach ($rows as $row):
+                    echo "<tr>";
+                        echo "<td>{$row['nome']}</td>";
+                        echo "<td>{$row['numero_pedidos']}</td>";
+                                include '../acoes.php';
+                    echo "</tr>";
+                endforeach;
+                echo "</tbody>";
+                echo "</table>";
+                echo "</div>";
+                include 'excluir.php';
+            } elseif ($rows == NULL) {
+                echo "<p class=\"alert-danger text-center\">";
+                echo "Nenhum resultado!";
+                echo "</p>";
             } else {
                 include "relatorio_erro.php";
             }

@@ -6,7 +6,7 @@
                     JOIN PEDIDO_CONTEM PC ON J.codigo = PC.JOGO_codigo
                     JOIN EMPRESA E ON J.EMPRESA_CNPJ = E.CNPJ
                     WHERE PC.PEDIDO_ID IN (SELECT P.ID FROM PEDIDO P
-                                            WHERE P.data BETWEEN '{$data1}' AND '{$data2}')
+                                            WHERE P.data BETWEEN CAST('{$data1}' AS DATE) AND CAST('{$data2}' AS DATE))
                     GROUP BY J.codigo
                     ORDER BY copias_vendidas DESC";
         $resultado = mysqli_query($conexao, $select);
@@ -23,7 +23,7 @@
                     JOIN PEDIDO P ON C.PESSOA_CPF = P.CLIENTE_PESSOA_CPF
                     JOIN PESSOA PE ON PE.CPF = C.PESSOA_CPF
                     JOIN USUARIO U ON U.ID = C.usuario
-                    WHERE P.data BETWEEN '{$data1}' AND '{$data2}'
+                    WHERE P.data BETWEEN CAST('{$data1}' AS DATE) AND CAST('{$data2}' AS DATE)
                     GROUP BY C.PESSOA_CPF
                     ORDER BY total_gasto DESC";
         $resultado = mysqli_query($conexao, $select);
@@ -51,20 +51,17 @@
 
     function relatorio_4($conexao, $data){ //Clientes que não realizaram compras após:
         $rows = array();
-        $select = "SELECT C.PESSOA_CPF, P.nome_pessoa, U.user, PE.data
+        $select = "SELECT C.PESSOA_CPF, P.nome_pessoa, U.user,  MAX(PE.data) AS data
                     FROM CLIENTE C
                     JOIN PESSOA P ON P.CPF = C.PESSOA_CPF
                     JOIN USUARIO U ON U.ID = C.usuario
                     JOIN PEDIDO PE ON PE.CLIENTE_PESSOA_CPF = C.PESSOA_CPF
                     WHERE C.PESSOA_CPF NOT IN (SELECT P1.CLIENTE_PESSOA_CPF
                                                 FROM PEDIDO P1
-                                                WHERE P1.data > '{$data}')
+                                                WHERE P1.data > CAST('{$data}' AS DATE))
                     AND C.PESSOA_CPF IN (SELECT P2.CLIENTE_PESSOA_CPF FROM PEDIDO P2)
-                    AND PE.data >= ALL (SELECT P1.data
-                                                FROM PEDIDO P1
-                                                WHERE P1.data <= '{$data}')
                     GROUP BY C.PESSOA_CPF
-                    ORDER BY PE.data";
+                    ORDER BY data DESC";
         $resultado = mysqli_query($conexao, $select);
         while ($row = mysqli_fetch_assoc($resultado)) {
             array_push($rows, $row);
@@ -121,12 +118,12 @@
 
     function relatorio_8($conexao){ //Empresas que possuem mais jogos vendidos
         $rows = array();
-        $select = "SELECT E.CNPJ, E.nome, E.telefone, SUM(JOGO_codigo) AS jogos_vendidos
+        $select = "SELECT E.CNPJ, E.nome, E.telefone, SUM(quantidade) AS jogos_vendidos
                     FROM EMPRESA E
                     JOIN JOGO J ON J.EMPRESA_CNPJ = E.CNPJ
                     JOIN PEDIDO_CONTEM PC ON PC.JOGO_codigo = J.codigo
                     GROUP BY E.CNPJ
-                    ORDER BY jogos_cadastrados DESC";
+                    ORDER BY jogos_vendidos DESC";
         $resultado = mysqli_query($conexao, $select);
         while ($row = mysqli_fetch_assoc($resultado)) {
             array_push($rows, $row);
@@ -142,7 +139,7 @@
                     JOIN PESSOA P ON P.CPF = S.FUNCIONARIO_PESSOA_CPF
                     JOIN USUARIO U ON U.ID = S.usuario
                     WHERE S.FUNCIONARIO_PESSOA_CPF IN (SELECT C.SUPERVISOR_FUNCIONARIO_PESSOA_CPF FROM COMPRA C
-                                                        WHERE C.data BETWEEN '{$data1}' AND '{$data2}')";
+                                                        WHERE C.data BETWEEN CAST('{$data1}' AS DATE) AND CAST('{$data2}' AS DATE))";
         $resultado = mysqli_query($conexao, $select);
         while ($row = mysqli_fetch_assoc($resultado)) {
             array_push($rows, $row);
@@ -157,6 +154,8 @@
                     JOIN CIDADE C ON C.ESTADO_ID = E.ID
                     JOIN ENDERECO EN ON C.ID = EN.CIDADE_ID
                     JOIN PEDIDO P ON P.CLIENTE_PESSOA_CPF = EN.PESSOA_CPF
+                    WHERE P.ID IN (SELECT P2.ID FROM PEDIDO P2
+                                            WHERE P2.data BETWEEN CAST('{$data1}' AS DATE) AND CAST('{$data2}' AS DATE))
                     GROUP BY E.ID
                     ORDER BY numero_pedidos DESC";
         $resultado = mysqli_query($conexao, $select);
