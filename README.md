@@ -2,6 +2,8 @@
 ### Sistema de gerenciamento de banco de dados com interface web - UTFPR
 Trabalho realizado como atividade avaliativa na disciplina de Bando de Dados 1, no curso de Ciência da Computação. UTFPR/CM - 2017/1
 
+-----
+
 * #### Pré-requisitos:
   * Servidor http (como o apache ou o próprio servidor nativo do PHP)
   * MySQL 5.6+ ou MariaDB 10.1.23+
