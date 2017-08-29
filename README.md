@@ -13,7 +13,8 @@ Trabalho realizado como atividade avaliativa na disciplina de Bando de Dados 1, 
     * Safari 6+
     * Firefox 32+
     * Internet Explorer 9+
-    
+
+
    (Em outras versões ou navegares pode vir a apresentar defeitos em sua interface)
 
 ------
@@ -47,5 +48,3 @@ servidor http tenha acesso.
 suportados, no diretorio do servidor http onde os arquivos foram colocados)
 
 -----
-
-
